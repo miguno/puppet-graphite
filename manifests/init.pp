@@ -93,8 +93,7 @@ class graphite(
   $carbon_aggregator_init_file    = undef,
   $carbon_aggregator_default_file = undef,
   $web_dashboard_config_file      = "puppet:///modules/${module_name}/etc/graphite-web/dashboard.conf",
-  $web_local_settings_file        = "puppet:///modules/${module_name}/etc/graphite-web/local_settings.py",
-  $use_epel                       = false
+  $web_local_settings_file        = "puppet:///modules/${module_name}/etc/graphite-web/local_settings.py"
 ) inherits graphite::params {
 
   #### Validate parameters

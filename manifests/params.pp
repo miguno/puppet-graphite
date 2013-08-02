@@ -46,18 +46,9 @@ class graphite::params {
   case $::operatingsystem {
     'CentOS', 'Fedora', 'Scientific': {
       # main application
-      # Install under a different name if use_epel is set, since EPEL's version
-      # is named python-carbon and python-whisper
-      if (graphite::use_epel == true) {
-        $package_carbon  = [ 'python-carbon' ]
-        $package_whisper = [ 'python-whisper' ]
-        $package_web     = [ 'graphite-web']
-      }
-      else {
-        $package_carbon  = [ 'carbon' ]
-        $package_whisper = [ 'whisper' ]
-        $package_web     = [ 'graphite-web']
-      }
+      $package_carbon  = [ 'python-carbon' ]
+      $package_whisper = [ 'python-whisper' ]
+      $package_web     = [ 'graphite-web']
     }
     'Debian', 'Ubuntu': {
       # main application
