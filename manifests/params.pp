@@ -48,7 +48,7 @@ class graphite::params {
       # main application
       # Install under a different name if use_epel is set, since EPEL's version
       # is named python-carbon and python-whisper
-      if graphite::use_epel {
+      if (graphite::use_epel == true) {
         $package_carbon  = [ 'python-carbon' ]
         $package_whisper = [ 'python-whisper' ]
         $package_web     = [ 'graphite-web']
