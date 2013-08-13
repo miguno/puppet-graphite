@@ -156,6 +156,16 @@ INDEX_FILE = '/var/lib/graphite-web/index'  # Search index file
 #DATABASE_PASSWORD = 'graphite-is-awesome'
 #DATABASE_HOST = 'mysql.mycompany.com'
 #DATABASE_PORT = '3306'
+DATABASES = {
+	'default': {
+		'NAME': '/var/lib/graphite-web/graphite.db',
+		'ENGINE': 'django.db.backends.sqlite3',
+		'USER': '',
+		'PASSWORD': '',
+		'HOST': '',
+		'PORT': ''
+	}
+}
 
 
 #########################
