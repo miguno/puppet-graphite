@@ -9,7 +9,7 @@
 # Set your local timezone (Django's default is America/Chicago)
 # If your graphs appear to be offset by a couple hours then this probably
 # needs to be explicitly set to your local timezone.
-TIME_ZONE = 'Europe/Amsterdam'
+#TIME_ZONE = 'America/Los_Angeles'
 
 # Override this to provide documentation specific to your Graphite deployment
 #DOCUMENTATION_URL = "http://graphite.readthedocs.org/"
@@ -43,29 +43,29 @@ TIME_ZONE = 'Europe/Amsterdam'
 #####################################
 # Change only GRAPHITE_ROOT if your install is merely shifted from /opt/graphite
 # to somewhere else
-#GRAPHITE_ROOT = '/opt/graphite'
+GRAPHITE_ROOT = '/usr/share/graphite'
 
 # Most installs done outside of a separate tree such as /opt/graphite will only
 # need to change these three settings. Note that the default settings for each
 # of these is relative to GRAPHITE_ROOT
-#CONF_DIR = '/opt/graphite/conf'
-#STORAGE_DIR = '/opt/graphite/storage'
-#CONTENT_DIR = '/opt/graphite/webapp/content'
+CONF_DIR = '/etc/graphite-web'
+STORAGE_DIR = '/var/lib/graphite-web'
+CONTENT_DIR = '/usr/share/graphite/webapp/content'
 
 # To further or fully customize the paths, modify the following. Note that the
 # default settings for each of these are relative to CONF_DIR and STORAGE_DIR
 #
 ## Webapp config files
-#DASHBOARD_CONF = '/opt/graphite/conf/dashboard.conf'
-#GRAPHTEMPLATES_CONF = '/opt/graphite/conf/graphTemplates.conf'
+#DASHBOARD_CONF = '/etc/graphite-web/dashboard.conf'
+#GRAPHTEMPLATES_CONF = '/etc/graphite-web/graphTemplates.conf'
 
 ## Data directories
 # NOTE: If any directory is unreadable in DATA_DIRS it will break metric browsing
-#WHISPER_DIR = '/opt/graphite/storage/whisper'
-#RRD_DIR = '/opt/graphite/storage/rrd'
-#DATA_DIRS = [WHISPER_DIR, RRD_DIR] # Default: set from the above variables
-#LOG_DIR = '/opt/graphite/storage/log/webapp'
-#INDEX_FILE = '/opt/graphite/storage/index'  # Search index file
+WHISPER_DIR = '/var/lib/carbon/whisper/'
+RRD_DIR = '/var/lib/carbon/rrd'
+DATA_DIRS = [WHISPER_DIR, RRD_DIR] # Default: set from the above variables
+LOG_DIR = '/var/log/graphite-web/'
+INDEX_FILE = '/var/lib/graphite-web/index'  # Search index file
 
 
 #####################################
@@ -156,6 +156,16 @@ TIME_ZONE = 'Europe/Amsterdam'
 #DATABASE_PASSWORD = 'graphite-is-awesome'
 #DATABASE_HOST = 'mysql.mycompany.com'
 #DATABASE_PORT = '3306'
+DATABASES = {
+	'default': {
+		'NAME': '/var/lib/graphite-web/graphite.db',
+		'ENGINE': 'django.db.backends.sqlite3',
+		'USER': '',
+		'PASSWORD': '',
+		'HOST': '',
+		'PORT': ''
+	}
+}
 
 
 #########################
