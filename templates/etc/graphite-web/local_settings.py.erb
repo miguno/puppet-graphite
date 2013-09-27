@@ -210,3 +210,10 @@ DATABASES = {
 # MIDDLEWARE_CLASSES or APPS
 #from graphite.app_settings import *
 
+# TODO: Make SECRET_KEY configurable
+# Django 1.5 requires this so we set a default but warn the user
+SECRET_KEY = 'UNSAFE_DEFAULT'
+
+# TODO: Make ALLOWED_HOSTS configurable
+# Django 1.5 requires this to be set. Here we default to prior behavior and allow all
+ALLOWED_HOSTS = [ '*' ]
