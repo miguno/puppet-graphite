@@ -166,7 +166,7 @@ WHISPER_AUTOFLUSH = False
 
 [relay]
 LINE_RECEIVER_INTERFACE = 0.0.0.0
-LINE_RECEIVER_PORT = 2013
+LINE_RECEIVER_PORT = <%= scope.lookupvar('graphite::carbon::relay_line_receiver_port') %>
 PICKLE_RECEIVER_INTERFACE = 0.0.0.0
 PICKLE_RECEIVER_PORT = 2014
 

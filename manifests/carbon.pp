@@ -73,6 +73,7 @@ class graphite::carbon(
   $config_file       = $graphite::params::carbon_config_file,
   $ensure            = $graphite::params::ensure,
   $relay_enable      = false,
+  $relay_line_receiver_port = 2013,
   $status            = $graphite::params::status,
   $version           = undef,
 ) inherits graphite::params {
@@ -95,6 +96,7 @@ class graphite::carbon(
     fail("\"${ensure}\" is not a valid ensure parameter value")
   }
   validate_bool($relay_enable)
+  if !is_integer($relay_line_receiver_port) { fail('The $relay_line_receiver_port parameter must be an integer number') }
   if ! ($status in [ 'enabled', 'disabled', 'running', 'unmanaged' ]) {
     fail("\"${status}\" is not a valid status parameter value")
   }
