@@ -63,35 +63,30 @@
 # * Richard Pijnenburg <mailto:richard@ispavailability.com>
 #
 class graphite::carbon(
-  $ensure            = $graphite::params::ensure,
+  $aggregator_enable = false,
   $autoupgrade       = $graphite::params::autoupgrade,
+  $cache_enable      = false,
+  $config_file       = $graphite::params::carbon_config_file,
+  $ensure            = $graphite::params::ensure,
+  $relay_enable      = false,
   $status            = $graphite::params::status,
   $version           = undef,
-  $cache_enable      = false,
-  $relay_enable      = false,
-  $aggregator_enable = false,
-  $config_file       = $graphite::params::carbon_config_file,
 ) inherits graphite::params {
 
   #### Validate parameters
 
-  # ensure
+  validate_bool($aggregator_enable)
+  validate_bool($autoupgrade)
+  validate_bool($cache_enable)
+  validate_string($config_file)
   if ! ($ensure in [ 'present', 'absent' ]) {
     fail("\"${ensure}\" is not a valid ensure parameter value")
   }
-
-  # autoupgrade
-  validate_bool($autoupgrade)
-
-  # service status
+  validate_bool($relay_enable)
   if ! ($status in [ 'enabled', 'disabled', 'running', 'unmanaged' ]) {
     fail("\"${status}\" is not a valid status parameter value")
   }
-
-  validate_bool($cache_enable)
-  validate_bool($relay_enable)
-  validate_bool($aggregator_enable)
-
+  validate_string($version)
 
   #### Manage actions
 
