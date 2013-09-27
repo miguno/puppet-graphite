@@ -1,12 +1,15 @@
 # puppet-graphite
 
-A puppet module for managing and configuring graphite
+A Puppet module for managing and configuring [Graphite](http://graphite.wikidot.com/).
 
-https://github.com/graphite-project
 
-This module is puppet 3 tested
+# Compatibility
 
-## Usage
+* Puppet 3.x
+* Tested with RHEL/CentOS 6
+
+
+# Usage
 
 Installation, make sure service is running and will be started at boot time:
 
@@ -24,7 +27,8 @@ Install everything but disable service(s) afterwards:
        status => 'disabled',
      }
 
-### carbon
+
+## carbon
 
 Carbon is 1 of the applications for graphite.
 You can activate the 3 separate services individually depending on requirments.
@@ -34,19 +38,23 @@ Common config variables:
      # Template
      carbon_config_file => "${module_name}/etc/carbon/carbon.conf.erb"
 
-#### cache
+
+### cache
 
      carbon_cache_enable => true
 
-#### relay
+
+### relay
 
      carbon_relay_enable => true
 
-#### aggregator
+
+### aggregator
 
      carbon_aggregator_enable => true
 
-#### storage definitions
+
+### storage definitions
 
 For defining the storage methods a define is in place:
 
@@ -58,8 +66,7 @@ For defining the storage methods a define is in place:
 An other of sequence can be given with the order => directive.
 
 
-
-### web
+## web
 
 For the graphite-web there are 2 variables:
 
@@ -69,13 +76,13 @@ For the graphite-web there are 2 variables:
 
 
 
-### whisper
+## whisper
 
 Whisper is the storage for all the data.
 This one has no special configuration.
 
 
-## Assumptions
+# Assumptions
 
 Certain assumptions have been made with this module:
 
