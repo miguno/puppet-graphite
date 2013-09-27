@@ -1,6 +1,6 @@
 # Graphite Web Basic mod_wsgi vhost
 
-<VirtualHost *:80>
+<VirtualHost *:<%= scope.lookupvar('graphite::web::server_port') %>>
 
     ServerName "<%= scope.lookupvar('graphite::web::server_name') %>"
 <% if scope.lookupvar('graphite::web::use_hostname_server_alias') -%>

@@ -69,6 +69,7 @@ class graphite::web(
   $ensure                = $graphite::params::ensure,
   $local_settings_file   = $graphite::params::web_local_settings_file,
   $server_name           = $graphite::params::web_server_name,
+  $server_port           = $graphite::params::web_server_port,
   $status                = $graphite::params::status,
   $use_hostname_server_alias = $graphite::params::web_use_hostname_server_alias,
   $version               = undef,
@@ -84,6 +85,9 @@ class graphite::web(
   }
   validate_string($local_settings_file)
   validate_string($server_name)
+  if !is_integer($server_port) {
+    fail('The $server_port parameter must be an integer number')
+  }
   if ! ($status in [ 'enabled', 'disabled', 'running', 'unmanaged' ]) {
     fail("\"${status}\" is not a valid status parameter value")
   }

@@ -48,6 +48,7 @@ class graphite::params {
   $web_dashboard_config_file     = "${module_name}/etc/graphite-web/dashboard.conf.erb"
   $web_local_settings_file       = "${module_name}/etc/graphite-web/local_settings.py.erb"
   $web_server_name               = "${::fqdn}"
+  $web_server_port               = 80
   $web_use_hostname_server_alias = true
 
   # packages
