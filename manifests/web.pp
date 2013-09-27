@@ -84,7 +84,9 @@ class graphite::web(
   }
   validate_string($local_settings_file)
   validate_string($server_name)
-  validate_string($status)
+  if ! ($status in [ 'enabled', 'disabled', 'running', 'unmanaged' ]) {
+    fail("\"${status}\" is not a valid status parameter value")
+  }
   validate_bool($use_fqdn_server_alias)
   validate_string($version)
 
