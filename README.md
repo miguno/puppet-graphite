@@ -63,8 +63,9 @@ An other of sequence can be given with the order => directive.
 
 For the graphite-web there are 2 variables:
 
-     web_dashboard_config_file => "${module_name}/etc/graphite-web/dashboard.conf.erb"
-     web_local_settings_file   => "${module_name}/etc/graphite-web/local_settings.py.erb"
+    # Templates
+    web_dashboard_config_file => "${module_name}/etc/graphite-web/dashboard.conf.erb"
+    web_local_settings_file   => "${module_name}/etc/graphite-web/local_settings.py.erb"
 
 
 
@@ -74,11 +75,11 @@ Whisper is the storage for all the data.
 This one has no special configuration.
 
 
-## assumptions
+## Assumptions
 
 Certain assumptions have been made with this module:
 
-1. carbon, graphite-web & whisper are available through a repository.
-2. when no config files are specified, the default ones are used.
-3. All 3 applications are standard installed.
-4. For the 3 processes from carbon; unless activated they are not running.
+1. Carbon, graphite-web & whisper are available through a package repository.
+2. When no config files are specified, the default ones are used.
+3. All three applications are standard installed.
+4. For the three processes from carbon; unless activated they are not running.
