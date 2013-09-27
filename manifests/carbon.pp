@@ -66,10 +66,12 @@ class graphite::carbon(
   $aggregator_enable = false,
   $autoupgrade       = $graphite::params::autoupgrade,
   $cache_enable      = false,
+  $cache_line_receiver_port = 2003,
+  $cache_max_creates_per_minute =  50,
+  $cache_max_updates_per_second = 500,
   $cache_query_port  = 7002,
   $config_file       = $graphite::params::carbon_config_file,
   $ensure            = $graphite::params::ensure,
-  $cache_line_receiver_port = 2003,
   $relay_enable      = false,
   $status            = $graphite::params::status,
   $version           = undef,
@@ -80,12 +82,18 @@ class graphite::carbon(
   validate_bool($aggregator_enable)
   validate_bool($autoupgrade)
   validate_bool($cache_enable)
+  if !is_integer($cache_line_receiver_port) { fail('The $cache_line_receiver_port parameter must be an integer number') }
+  if !is_integer($cache_max_creates_per_minute) {
+    fail('The $cache_max_creates_per_minute parameter must be an integer number')
+  }
+  if !is_integer($cache_max_updates_per_second) {
+    fail('The $cache_max_updates_per_second parameter must be an integer number')
+  }
   if !is_integer($cache_query_port) { fail('The $cache_query_port parameter must be an integer number') }
   validate_string($config_file)
   if ! ($ensure in [ 'present', 'absent' ]) {
     fail("\"${ensure}\" is not a valid ensure parameter value")
   }
-  if !is_integer($cache_line_receiver_port) { fail('The $cache_line_receiver_port parameter must be an integer number') }
   validate_bool($relay_enable)
   if ! ($status in [ 'enabled', 'disabled', 'running', 'unmanaged' ]) {
     fail("\"${status}\" is not a valid status parameter value")
