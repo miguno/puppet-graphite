@@ -70,7 +70,7 @@ class graphite::web(
   $local_settings_file   = $graphite::params::web_local_settings_file,
   $server_name           = $graphite::params::web_server_name,
   $status                = $graphite::params::status,
-  $use_fqdn_server_alias = $graphite::params::web_use_fqdn_server_alias,
+  $use_hostname_server_alias = $graphite::params::web_use_hostname_server_alias,
   $version               = undef,
 ) inherits graphite::params {
 
@@ -87,7 +87,7 @@ class graphite::web(
   if ! ($status in [ 'enabled', 'disabled', 'running', 'unmanaged' ]) {
     fail("\"${status}\" is not a valid status parameter value")
   }
-  validate_bool($use_fqdn_server_alias)
+  validate_bool($use_hostname_server_alias)
   validate_string($version)
 
   #### Manage actions
