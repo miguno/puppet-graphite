@@ -49,7 +49,7 @@ class graphite::carbon::config {
 
   file { '/etc/carbon/carbon.conf':
     ensure  => present,
-    source  => $graphite::carbon::config_file,
+    content => template("$graphite::carbon::config_file"),
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
