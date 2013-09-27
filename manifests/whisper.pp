@@ -48,7 +48,7 @@
 #
 # [*version*]
 #   String to set the specific version you want to install.
-#   Defaults to <tt>false</tt>.
+#   Defaults to <tt>undef</tt>.
 #
 # The default values for the parameters are set in graphite::params. Have
 # a look at the corresponding <tt>params.pp</tt> manifest file if you need more
@@ -66,7 +66,7 @@ class graphite::whisper(
   $ensure      = $graphite::params::ensure,
   $autoupgrade = $graphite::params::autoupgrade,
   $status      = $graphite::params::status,
-  $version     = false
+  $version     = undef,
 ) inherits graphite::params {
 
   #### Validate parameters

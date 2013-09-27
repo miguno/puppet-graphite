@@ -28,24 +28,18 @@ class graphite::whisper::package {
 
   # set params: in operation
   if $graphite::ensure == 'present' {
-
-    # Check if we want to install a specific version or not
-    if $graphite::version == false {
-
+    if $graphite::version != undef {
       $package_ensure = $graphite::autoupgrade ? {
         true  => 'latest',
         false => 'present',
       }
-
-    } else {
-
-      # install specific version
-      $package_ensure = $graphite::version
-
     }
-
+    else {
+      $package_ensure = $graphite::version
+    }
+  }
   # set params: removal
-  } else {
+  else {
     $package_ensure = 'purged'
   }
 
