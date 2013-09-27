@@ -60,4 +60,12 @@ class graphite::web::config {
     require => File['/etc/httpd/conf.d'],
   }
 
+  file { '/etc/httpd/conf.d/graphite-web.load':
+    ensure  => link,
+    target  => '/etc/httpd/conf.d/graphite-web.conf',
+    owner   => 'root',
+    group   => 'root',
+    require => File['/etc/httpd/conf.d/graphite-web.conf'],
+  }
+
 }
