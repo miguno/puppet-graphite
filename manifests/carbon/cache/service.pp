@@ -62,8 +62,25 @@ class graphite::carbon::cache::service {
       }
     }
 
+    if ($graphite::status in ['enabled', 'running', 'unmanaged']) {
+      if $graphite::firewall == true {
+        firewall { '101 Graphite: allow access to carbon-cache line receiver port':
+          port    => $graphite::carbon::cache_line_receiver_port,
+          proto   => 'tcp',
+          action  => 'accept',
+          require => Class['::firewall'],
+        }
+        firewall { '102 Graphite: allow access to carbon-cache cache query port':
+          port    => $graphite::carbon::cache_query_port,
+          proto   => 'tcp',
+          action  => 'accept',
+          require => Class['::firewall'],
+        }
+      }
+    }
+  }
   # set params: removal
-  } else {
+  else {
 
     # make sure the service is stopped and disabled (the removal itself will be
     # done by package.pp)
