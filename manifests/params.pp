@@ -42,9 +42,9 @@ class graphite::params {
 
   #### Internal module values
 
-  $carbon_config_file        = "puppet:///modules/${module_name}/etc/carbon/carbon.conf"
-  $web_dashboard_config_file = "puppet:///modules/${module_name}/etc/graphite-web/dashboard.conf"
-  $web_local_settings_file   = "puppet:///modules/${module_name}/etc/graphite-web/local_settings.py"
+  $carbon_config_file        = "${module_name}/etc/carbon/carbon.conf"
+  $web_dashboard_config_file = "${module_name}/etc/graphite-web/dashboard.conf"
+  $web_local_settings_file   = "${module_name}/etc/graphite-web/local_settings.py"
 
   # packages
   case $::operatingsystem {
