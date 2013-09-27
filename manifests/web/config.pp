@@ -51,4 +51,13 @@ class graphite::web::config {
     require => File['/etc/carbon']
   }
 
+  file { '/etc/httpd/conf.d/graphite-web.conf':
+    ensure  => present,
+    content => template($graphite::web::web_apache_config_file),
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    require => File['/etc/httpd/conf.d'],
+  }
+
 }

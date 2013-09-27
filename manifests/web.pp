@@ -67,6 +67,7 @@ class graphite::web(
   $autoupgrade             = $graphite::params::autoupgrade,
   $status                  = $graphite::params::status,
   $version                 = false,
+  $apache_config_file      = $graphite::params::web_apache_config_file,
   $dashboard_config_file   = $graphite::params::web_dashboard_config_file,
   $local_settings_file     = $graphite::params::web_local_settings_file,
 ) inherits graphite::params {
@@ -80,6 +81,8 @@ class graphite::web(
 
   # autoupgrade
   validate_bool($autoupgrade)
+
+  validate_string($apache_config_file)
 
   #### Manage actions
 
