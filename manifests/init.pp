@@ -48,6 +48,12 @@
 #   more than one is managed (see <tt>service.pp</tt> to check if this is the
 #   case).
 #
+# [*time_zone*]
+#   String to configure the time zone used by Graphite.
+#   Q.v.:
+#   * Allowed values: {List of tz database time zones}[http://en.wikipedia.org/wiki/List_of_tz_database_time_zones]
+#   Defaults to <tt>America/New_York</tt>.
+#
 # [*version*]
 #   String to set the specific version you want to install.
 #   Defaults to <tt>false</tt>.
@@ -92,6 +98,7 @@ class graphite(
   $carbon_relay_default_file      = undef,
   $carbon_aggregator_init_file    = undef,
   $carbon_aggregator_default_file = undef,
+  $time_zone                      = $graphite::params::time_zone,
   $web_dashboard_config_file      = $graphite::params::web_dashboard_config_file,
   $web_local_settings_file        = $graphite::params::web_local_settings_file,
 ) inherits graphite::params {

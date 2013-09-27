@@ -43,6 +43,7 @@ class graphite::params {
   #### Internal module values
 
   $carbon_config_file        = "${module_name}/etc/carbon/carbon.conf.erb"
+  $time_zone                 = "America/New_York" # see http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   $web_dashboard_config_file = "${module_name}/etc/graphite-web/dashboard.conf.erb"
   $web_local_settings_file   = "${module_name}/etc/graphite-web/local_settings.py.erb"
 
