@@ -44,7 +44,7 @@ class graphite::web::config {
 
   file { '/etc/graphite-web/dashboard.conf':
     ensure  => present,
-    source  => $graphite::web::dashboard_config_file,
+    content => template($graphite::web::dashboard_config_file),
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
