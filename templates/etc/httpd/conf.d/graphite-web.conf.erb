@@ -2,7 +2,10 @@
 
 <VirtualHost *:80>
 
-    ServerName graphite-web
+    ServerName <%= scope.lookupvar('graphite::web::server_name') %>
+<% if scope.lookupvar('graphite::web::use_hostname_server_alias') -%>
+    ServerAlias <%= scope.lookupvar('::hostname') %>
+<% end -%>
     DocumentRoot "/usr/share/graphite/webapp"
     ErrorLog /var/log/httpd/graphite-web-error.log
     CustomLog /var/log/httpd/graphite-web-access.log common

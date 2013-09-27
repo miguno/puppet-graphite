@@ -63,13 +63,15 @@
 # * Richard Pijnenburg <mailto:richard@ispavailability.com>
 #
 class graphite::web(
-  $apache_config_file      = $graphite::params::web_apache_config_file,
-  $autoupgrade             = $graphite::params::autoupgrade,
-  $dashboard_config_file   = $graphite::params::web_dashboard_config_file,
-  $ensure                  = $graphite::params::ensure,
-  $local_settings_file     = $graphite::params::web_local_settings_file,
-  $status                  = $graphite::params::status,
-  $version                 = false,
+  $apache_config_file    = $graphite::params::web_apache_config_file,
+  $autoupgrade           = $graphite::params::autoupgrade,
+  $dashboard_config_file = $graphite::params::web_dashboard_config_file,
+  $ensure                = $graphite::params::ensure,
+  $local_settings_file   = $graphite::params::web_local_settings_file,
+  $server_name           = $graphite::params::web_server_name,
+  $status                = $graphite::params::status,
+  $use_fqdn_server_alias = $graphite::params::web_use_fqdn_server_alias,
+  $version               = false,
 ) inherits graphite::params {
 
   #### Validate parameters
@@ -81,7 +83,9 @@ class graphite::web(
     fail("\"${ensure}\" is not a valid ensure parameter value")
   }
   validate_string($local_settings_file)
+  validate_string($server_name)
   validate_string($status)
+  validate_bool($use_fqdn_server_alias)
   validate_string($version)
 
   #### Manage actions

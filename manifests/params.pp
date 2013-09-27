@@ -42,11 +42,13 @@ class graphite::params {
 
   #### Internal module values
 
-  $carbon_config_file        = "${module_name}/etc/carbon/carbon.conf.erb"
-  $time_zone                 = "America/New_York" # see http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-  $web_apache_config_file    = "${module_name}/etc/httpd/conf.d/graphite-web.conf.erb"
-  $web_dashboard_config_file = "${module_name}/etc/graphite-web/dashboard.conf.erb"
-  $web_local_settings_file   = "${module_name}/etc/graphite-web/local_settings.py.erb"
+  $carbon_config_file            = "${module_name}/etc/carbon/carbon.conf.erb"
+  $time_zone                     = "America/New_York" # see http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  $web_apache_config_file        = "${module_name}/etc/httpd/conf.d/graphite-web.conf.erb"
+  $web_dashboard_config_file     = "${module_name}/etc/graphite-web/dashboard.conf.erb"
+  $web_local_settings_file       = "${module_name}/etc/graphite-web/local_settings.py.erb"
+  $web_server_name               = "${::fqdn}"
+  $web_use_hostname_server_alias = true
 
   # packages
   case $::operatingsystem {

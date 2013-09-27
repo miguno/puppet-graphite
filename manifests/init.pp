@@ -102,6 +102,8 @@ class graphite(
   $web_apache_config_file         = $graphite::params::web_apache_config_file,
   $web_dashboard_config_file      = $graphite::params::web_dashboard_config_file,
   $web_local_settings_file        = $graphite::params::web_local_settings_file,
+  $web_server_name                = $graphite::params::web_server_name,
+  $web_use_hostname_server_alias  = $graphite::params::web_use_hostname_server_alias,
 ) inherits graphite::params {
 
   #### Validate parameters
@@ -120,6 +122,8 @@ class graphite(
   }
 
   validate_string($web_apache_config_file)
+  validate_string($web_server_name)
+  validate_bool($web_use_hostname_server_alias)
 
   #### Manage actions
 
