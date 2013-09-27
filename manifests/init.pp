@@ -129,6 +129,11 @@ class graphite(
   if !is_integer($web_server_port) {
     fail('The $web_server_port parameter must be an integer number')
   }
+  else {
+    if $web_server_port == 80 {
+      fail('Right now the $web_server_port must not be 80, because otherwise we run into httpd config conflicts (TODO)')
+    }
+  }
   validate_bool($web_use_hostname_server_alias)
 
   #### Manage actions
