@@ -31,7 +31,8 @@ You can activate the 3 separate services individually depending on requirments.
 
 Common config variables:
 
-     carbon_config_file => "puppet:///modules/${module_name}/path/to/your/carbon.conf"
+     # Template
+     carbon_config_file => "${module_name}/etc/carbon/carbon.conf.erb"
 
 #### cache
 
@@ -62,14 +63,15 @@ An other of sequence can be given with the order => directive.
 
 For the graphite-web there are 2 variables:
 
-     web_dashboard_config_file => "puppet:///modules/${module_name}/path/to/your/dashboard.conf"
-     web_local_settings_file   => "puppet:///modules/${module_name}/path/to/your/local_settings.py"
+     web_dashboard_config_file => "${module_name}/etc/graphite-web/dashboard.conf.erb"
+     web_local_settings_file   => "${module_name}/etc/graphite-web/local_settings.py.erb"
+
+
 
 ### whisper
 
 Whisper is the storage for all the data.
 This one has no special configuration.
-
 
 
 ## assumptions
