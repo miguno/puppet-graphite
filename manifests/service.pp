@@ -62,8 +62,9 @@ class graphite::service {
       }
     }
 
+  }
   # set params: removal
-  } else {
+  else {
 
     # make sure the service is stopped and disabled (the removal itself will be
     # done by package.pp)
