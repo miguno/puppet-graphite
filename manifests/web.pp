@@ -67,8 +67,8 @@ class graphite::web(
   $autoupgrade             = $graphite::params::autoupgrade,
   $status                  = $graphite::params::status,
   $version                 = false,
-  $dashboard_config_file   = "puppet:///modules/${module_name}/etc/graphite-web/dashboard.conf",
-  $local_settings_file     = "puppet:///modules/${module_name}/etc/graphite-web/local_settings.py"
+  $dashboard_config_file   = $graphite::params::web_dashboard_config_file,
+  $local_settings_file     = $graphite::params::web_local_settings_file,
 ) inherits graphite::params {
 
   #### Validate parameters

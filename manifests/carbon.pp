@@ -70,7 +70,7 @@ class graphite::carbon(
   $cache_enable      = false,
   $relay_enable      = false,
   $aggregator_enable = false,
-  $config_file       = "puppet:///modules/${module_name}/etc/carbon/carbon.conf"
+  $config_file       = $graphite::params::carbon_config_file,
 ) inherits graphite::params {
 
   #### Validate parameters

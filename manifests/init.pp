@@ -85,15 +85,15 @@ class graphite(
   $carbon_cache_enable            = false,
   $carbon_relay_enable            = false,
   $carbon_aggregator_enable       = false,
-  $carbon_config_file             = "puppet:///modules/${module_name}/etc/carbon/carbon.conf",
+  $carbon_config_file             = $graphite::params::carbon_config_file,
   $carbon_cache_init_file         = undef,
   $carbon_cache_default_file      = undef,
   $carbon_relay_init_file         = undef,
   $carbon_relay_default_file      = undef,
   $carbon_aggregator_init_file    = undef,
   $carbon_aggregator_default_file = undef,
-  $web_dashboard_config_file      = "puppet:///modules/${module_name}/etc/graphite-web/dashboard.conf",
-  $web_local_settings_file        = "puppet:///modules/${module_name}/etc/graphite-web/local_settings.py"
+  $web_dashboard_config_file      = $graphite::params::web_dashboard_config_file,
+  $web_local_settings_file        = $graphite::params::web_local_settings_file,
 ) inherits graphite::params {
 
   #### Validate parameters
