@@ -84,10 +84,7 @@
 # * Richard Pijnenburg <mailto:richard@ispavailability.com>
 #
 class graphite(
-  $ensure                         = $graphite::params::ensure,
   $autoupgrade                    = $graphite::params::autoupgrade,
-  $status                         = $graphite::params::status,
-  $version                        = false,
   $carbon_cache_enable            = false,
   $carbon_relay_enable            = false,
   $carbon_aggregator_enable       = false,
@@ -98,30 +95,33 @@ class graphite(
   $carbon_relay_default_file      = undef,
   $carbon_aggregator_init_file    = undef,
   $carbon_aggregator_default_file = undef,
+  $ensure                         = $graphite::params::ensure,
+  $status                         = $graphite::params::status,
   $time_zone                      = $graphite::params::time_zone,
   $web_apache_config_file         = $graphite::params::web_apache_config_file,
   $web_dashboard_config_file      = $graphite::params::web_dashboard_config_file,
   $web_local_settings_file        = $graphite::params::web_local_settings_file,
   $web_server_name                = $graphite::params::web_server_name,
   $web_use_hostname_server_alias  = $graphite::params::web_use_hostname_server_alias,
+  $version                        = false,
 ) inherits graphite::params {
 
   #### Validate parameters
 
-  # ensure
+  validate_bool($autoupgrade)
   if ! ($ensure in [ 'present', 'absent' ]) {
     fail("\"${ensure}\" is not a valid ensure parameter value")
   }
-
-  # autoupgrade
-  validate_bool($autoupgrade)
-
-  # service status
+  validate_bool($carbon_cache_enable)
+  validate_bool($carbon_relay_enable)
+  validate_bool($carbon_aggregator_enable)
+  validate_string($carbon_config_file)
   if ! ($status in [ 'enabled', 'disabled', 'running', 'unmanaged' ]) {
     fail("\"${status}\" is not a valid status parameter value")
   }
-
   validate_string($web_apache_config_file)
+  validate_string($web_dashboard_config_file)
+  validate_string($web_local_settings_file)
   validate_string($web_server_name)
   validate_bool($web_use_hostname_server_alias)
 
