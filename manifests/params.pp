@@ -44,7 +44,7 @@ class graphite::params {
 
   $carbon_config_file        = "${module_name}/etc/carbon/carbon.conf.erb"
   $web_dashboard_config_file = "${module_name}/etc/graphite-web/dashboard.conf.erb"
-  $web_local_settings_file   = "${module_name}/etc/graphite-web/local_settings.py"
+  $web_local_settings_file   = "${module_name}/etc/graphite-web/local_settings.py.erb"
 
   # packages
   case $::operatingsystem {
