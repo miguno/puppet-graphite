@@ -63,25 +63,23 @@
 # * Richard Pijnenburg <mailto:richard@ispavailability.com>
 #
 class graphite::web(
-  $ensure                  = $graphite::params::ensure,
+  $apache_config_file      = $graphite::params::web_apache_config_file,
   $autoupgrade             = $graphite::params::autoupgrade,
+  $dashboard_config_file   = $graphite::params::web_dashboard_config_file,
+  $ensure                  = $graphite::params::ensure,
+  $local_settings_file     = $graphite::params::web_local_settings_file,
   $status                  = $graphite::params::status,
   $version                 = false,
-  $apache_config_file      = $graphite::params::web_apache_config_file,
-  $dashboard_config_file   = $graphite::params::web_dashboard_config_file,
-  $local_settings_file     = $graphite::params::web_local_settings_file,
 ) inherits graphite::params {
 
   #### Validate parameters
 
-  # ensure
+  validate_string($apache_config_file)
+  validate_bool($autoupgrade)
+  validate_string($dashboard_config_file)
   if ! ($ensure in [ 'present', 'absent' ]) {
     fail("\"${ensure}\" is not a valid ensure parameter value")
   }
-
-  validate_bool($autoupgrade)
-  validate_string($apache_config_file)
-  validate_string($dashboard_config_file)
   validate_string($local_settings_file)
   validate_string($status)
   validate_string($version)
@@ -99,7 +97,6 @@ class graphite::web(
   if $ensure == 'present' {
     # we need the software before configuring it
     Class['graphite::web::package'] -> Class['graphite::web::config']
-
   }
 
 }
