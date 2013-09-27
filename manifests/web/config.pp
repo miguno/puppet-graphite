@@ -68,4 +68,15 @@ class graphite::web::config {
     require => File['/etc/httpd/conf.d/graphite-web.conf'],
   }
 
+  if ($graphite::status in ['enabled', 'running', 'unmanaged']) {
+    if $graphite::firewall == true {
+      firewall { '100 Graphite: allow access to Graphite web port':
+        port    => $graphite::web_server_port,
+        proto   => 'tcp',
+        action  => 'accept',
+        require => Class['::firewall'],
+      }
+    }
+  }
+
 }
