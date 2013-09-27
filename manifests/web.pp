@@ -79,10 +79,12 @@ class graphite::web(
     fail("\"${ensure}\" is not a valid ensure parameter value")
   }
 
-  # autoupgrade
   validate_bool($autoupgrade)
-
   validate_string($apache_config_file)
+  validate_string($dashboard_config_file)
+  validate_string($local_settings_file)
+  validate_string($status)
+  validate_string($version)
 
   #### Manage actions
 
