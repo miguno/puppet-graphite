@@ -1,4 +1,10 @@
-# Graphite Web Basic mod_wsgi vhost
+### Graphite Web Basic mod_wsgi vhost
+
+# Ensure that Apache listens on port <%= scope.lookupvar('graphite::web::server_port') %>
+Listen <%= scope.lookupvar('graphite::web::server_port') %>
+
+# Listen for virtual host requests on all IP addresses
+NameVirtualHost *:<%= scope.lookupvar('graphite::web::server_port') %>
 
 <VirtualHost *:<%= scope.lookupvar('graphite::web::server_port') %>>
 
