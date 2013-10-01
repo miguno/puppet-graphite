@@ -54,7 +54,7 @@ class graphite::params {
 
   # packages
   case $::operatingsystem {
-    'CentOS', 'Fedora', 'RedHat', 'Scientific': {
+    'CentOS', 'Fedora', 'RedHat', 'Amazon' ,'Scientific': {
       # main application
       $package_carbon  = [ 'python-carbon' ]
       $package_whisper = [ 'python-whisper' ]
@@ -67,7 +67,7 @@ class graphite::params {
 
   # service parameters
   case $::operatingsystem {
-    'CentOS', 'Fedora', 'RedHat', 'Scientific': {
+    'CentOS', 'Fedora', 'RedHat', 'Amazon', 'Scientific': {
       $service_default_path     = '/etc/sysconfig'
 
       $service_cache_name       = 'carbon-cache'
