@@ -89,7 +89,6 @@ class graphite::web(
   $admin_email           = 'admin@example.com',
   $admin_password        = 'pbkdf2_sha256$10000$yhmSGMwIMU0t$HDegvfcy2i14qhQgWhDP7fL5Pf658Cfu065iv0e8YlE=',
   $admin_user            = 'admin',
-  $apache_config_file    = "${module_name}/etc/httpd/conf.d/graphite-web.conf.erb",
   $autoupgrade           = $graphite::params::autoupgrade,
   $dashboard_config_file = "${module_name}/etc/graphite-web/dashboard.conf.erb",
   $django_secret_key     = 'UNSAFE_DEFAULT',
@@ -103,14 +102,13 @@ class graphite::web(
   $status                = $graphite::params::status,
   $use_hostname_server_alias = true,
   $version               = undef,
-  $webserver_user        = 'apache',
-  $webserver_group       = 'apache',
+  $webserver_user        = 'nginx',
+  $webserver_group       = 'nginx',
 ) inherits graphite::params {
 
   validate_string($admin_email)
   validate_string($admin_password)
   validate_string($admin_user)
-  validate_string($apache_config_file)
   validate_bool($autoupgrade)
   validate_string($dashboard_config_file)
   validate_string($django_secret_key)

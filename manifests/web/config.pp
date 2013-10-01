@@ -25,15 +25,6 @@ class graphite::web::config {
     require => File['/etc/carbon']
   }
 
-  file { '/etc/httpd/conf.d/graphite-web.conf':
-    ensure  => present,
-    content => template($graphite::web::apache_config_file),
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    require => File['/etc/httpd/conf.d'],
-  }
-
   if ($graphite::status in ['enabled', 'running', 'unmanaged']) {
     if $graphite::firewall == true {
       firewall { '100 Graphite: allow access to Graphite web port':
