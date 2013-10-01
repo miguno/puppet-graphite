@@ -1,20 +1,10 @@
 class graphite::params {
 
-  #### Default values for the parameters of the main module class, init.pp
-
-  # ensure
-  $ensure = 'present'
-
-  # autoupgrade
   $autoupgrade = false
-
-  # service status
-  $status = 'enabled'
-
-  #### Internal module values
-
   $carbon_config_file            = "${module_name}/etc/carbon/carbon.conf.erb"
+  $ensure = 'present'
   $firewall                      = false
+  $status = 'enabled'
   $time_zone                     = "America/New_York" # see http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   $web_apache_config_file        = "${module_name}/etc/httpd/conf.d/graphite-web.conf.erb"
   $web_dashboard_config_file     = "${module_name}/etc/graphite-web/dashboard.conf.erb"
@@ -23,7 +13,6 @@ class graphite::params {
   $web_server_port               = 8080
   $web_use_hostname_server_alias = true
 
-  # packages
   case $::operatingsystem {
     'CentOS', 'Fedora', 'RedHat', 'Amazon' ,'Scientific': {
       # main application
@@ -36,7 +25,6 @@ class graphite::params {
     }
   }
 
-  # service parameters
   case $::operatingsystem {
     'CentOS', 'Fedora', 'RedHat', 'Amazon', 'Scientific': {
       $service_default_path     = '/etc/sysconfig'
