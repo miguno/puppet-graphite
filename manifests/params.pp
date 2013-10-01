@@ -67,8 +67,7 @@ class graphite::params {
       $package_web     = [ 'graphite-web' ] # available since Debian Jessie
     }
     default: {
-      fail("\"${module_name}\" provides no package default value
-            for \"${::operatingsystem}\"")
+      fail("'${module_name}' provides no package default value for '${::operatingsystem}'")
     }
   }
 
@@ -113,8 +112,7 @@ class graphite::params {
 
     }
     default: {
-      fail("\"${module_name}\" provides no service parameters
-            for \"${::operatingsystem}\"")
+      fail("'${module_name}' provides no service parameters for '${::operatingsystem}'")
     }
   }
 
