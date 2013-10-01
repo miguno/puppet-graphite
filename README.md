@@ -112,8 +112,8 @@ Now you can use Python to encrypt your password:
 >>> import base64, hashlib
 >>> algorithm = 'pbkdf2_sha256'
 >>> iterations = 10000
->>> salt = 'yhmSGMwIMU0t'
->>> plaintext_password = 'wirbelsturm'
+>>> salt = 'yhmSGMwIMU0t'               # <<<< Pick your own random string instead of this one.
+>>> plaintext_password = 'wirbelsturm'  # <<<< Use your own unencrypted password here.
 >>> hash = pbkdf2(plaintext_password, salt, iterations, 32, hashlib.sha256).encode('base64').strip()
 >>> hashed_password = '{algorithm}${iterations}${salt}${hash}'.format(algorithm=algorithm,iterations=iterations,salt=salt,hash=hash)
 >>> print hashed_password
