@@ -118,7 +118,6 @@ class graphite::web(
   $use_hostname_server_alias = true,
   $version               = undef,
   $webserver_group       = 'nginx',
-  $webserver_name           = "${::fqdn}",
   $webserver_port           = 8080,
   $webserver_user        = 'nginx',
 ) inherits graphite::params {
@@ -159,7 +158,6 @@ class graphite::web(
   validate_bool($use_hostname_server_alias)
   validate_string($version)
   validate_string($webserver_group)
-  validate_string($webserver_name)
   if !is_integer($webserver_port) { fail('The $webserver_port parameter must be an integer number') }
   validate_string($webserver_user)
 
