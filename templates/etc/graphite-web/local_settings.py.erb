@@ -158,7 +158,7 @@ INDEX_FILE = '/var/lib/graphite-web/index'  # Search index file
 #DATABASE_PORT = '3306'
 DATABASES = {
   'default': {
-    'NAME': '/var/lib/graphite-web/graphite.db',
+    'NAME': '<%= scope.lookupvar("graphite::web::db") %>',
     'ENGINE': 'django.db.backends.sqlite3',
     'USER': '',
     'PASSWORD': '',

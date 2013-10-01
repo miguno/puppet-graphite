@@ -29,6 +29,10 @@
 #   * {Puppet's package provider source code}[http://j.mp/wtVCaL]
 #   Defaults to <tt>false</tt>.
 #
+# [*admin_password*]
+#   String.  The SHA256-hashed password of the admin user of graphite-web.
+#   Defaults to the hash of the password <tt>wirbelsturm</tt>.
+#
 # [*status*]
 #   String to define the status of the service. Possible values:
 #   * <tt>enabled</tt>: Service is running and will be started at boot time.
@@ -67,20 +71,32 @@ class graphite::web(
   $autoupgrade           = $graphite::params::autoupgrade,
   $dashboard_config_file = $graphite::params::web_dashboard_config_file,
   $ensure                = $graphite::params::ensure,
+  $db                    = '/var/lib/graphite-web/graphite.db',
+  $db_init_file          = '/tmp/graphite_initial_data.json.json',
+  $db_init_file_template = "${module_name}/initial_data.json.erb",
   $local_settings_file   = $graphite::params::web_local_settings_file,
   $server_name           = $graphite::params::web_server_name,
   $server_port           = $graphite::params::web_server_port,
   $status                = $graphite::params::status,
+  $admin_user            = 'admin',
+  $admin_password        = 'pbkdf2_sha256$10000$yhmSGMwIMU0t$HDegvfcy2i14qhQgWhDP7fL5Pf658Cfu065iv0e8YlE=',
+  $admin_email           = 'admin@example.com',
   $use_hostname_server_alias = $graphite::params::web_use_hostname_server_alias,
   $version               = undef,
 ) inherits graphite::params {
 
+  validate_string($admin_email)
+  validate_string($admin_password)
+  validate_string($admin_user)
   validate_string($apache_config_file)
   validate_bool($autoupgrade)
   validate_string($dashboard_config_file)
   if ! ($ensure in [ 'present', 'absent' ]) {
     fail("\"${ensure}\" is not a valid ensure parameter value")
   }
+  validate_absolute_path($db)
+  validate_absolute_path($db_init_file)
+  validate_string($db_init_file_template)
   validate_string($local_settings_file)
   validate_string($server_name)
   if !is_integer($server_port) {
