@@ -2,6 +2,8 @@
 
 A Puppet module for managing and configuring [Graphite](http://graphite.wikidot.com/).
 
+_Note: This module is a work in progress.  The code still needs some cleaning and better style._
+
 
 # Compatibility
 
@@ -138,3 +140,6 @@ Certain assumptions have been made with this module:
 2. When no config files are specified, the default ones are used.
 3. All three applications are standard installed.
 4. For the three processes from carbon; unless activated they are not running.
+5. If you want to run graphite-web, then supervisord 3.x must be available through a package repository and you have
+   loaded the [puppet-supervisor](https://github.com/miguno/puppet-supervisor) module (e.g. through librarian-puppet)
+   as forked by miguno.
