@@ -89,6 +89,7 @@ class graphite::web(
   $apache_config_file    = "${module_name}/etc/httpd/conf.d/graphite-web.conf.erb",
   $autoupgrade           = $graphite::params::autoupgrade,
   $dashboard_config_file = "${module_name}/etc/graphite-web/dashboard.conf.erb",
+  $django_secret_key     = 'UNSAFE_DEFAULT',
   $ensure                = $graphite::params::ensure,
   $db                    = '/var/lib/graphite-web/graphite.db',
   $db_init_file          = '/tmp/graphite_initial_data.json.json',
@@ -112,6 +113,7 @@ class graphite::web(
   validate_string($apache_config_file)
   validate_bool($autoupgrade)
   validate_string($dashboard_config_file)
+  validate_string($django_secret_key)
   if ! ($ensure in [ 'present', 'absent' ]) {
     fail("\"${ensure}\" is not a valid ensure parameter value")
   }

@@ -212,7 +212,7 @@ DATABASES = {
 
 # TODO: Make SECRET_KEY configurable
 # Django 1.5 requires this so we set a default but warn the user
-SECRET_KEY = 'UNSAFE_DEFAULT'
+SECRET_KEY = '<%= scope.lookupvar("graphite::web::django_secret_key") %>'
 
 # TODO: Make ALLOWED_HOSTS configurable
 # Django 1.5 requires this to be set. Here we default to prior behavior and allow all
