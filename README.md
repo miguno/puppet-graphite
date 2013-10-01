@@ -98,30 +98,28 @@ First we will install Django in a local sandbox because we only need it to creat
     $ source bin/activate
     (django-sandbox) $ pip install django
 
-    # Now see below for how to encrypt a custom password.
-    # Once you are done, run the following command to leave
-    # and destroy the sandbox.
-    (django-sandbox) $ deactivate
-    $ rm -rf /tmp/django-sandbox
-
 Now you can use Python to encrypt your password:
 
-```shell
-(django-sandbox) $ python
->>> from django.utils.crypto import pbkdf2
->>> import base64, hashlib
->>> algorithm = 'pbkdf2_sha256'
->>> iterations = 10000
->>> salt = 'yhmSGMwIMU0t'               # <<<< Pick your own random string instead of this one.
->>> plaintext_password = 'wirbelsturm'  # <<<< Use your own unencrypted password here.
->>> hash = pbkdf2(plaintext_password, salt, iterations, 32, hashlib.sha256).encode('base64').strip()
->>> hashed_password = '{algorithm}${iterations}${salt}${hash}'.format(algorithm=algorithm,iterations=iterations,salt=salt,hash=hash)
->>> print hashed_password
-pbkdf2_sha256$10000$yhmSGMwIMU0t$HDegvfcy2i14qhQgWhDP7fL5Pf658Cfu065iv0e8YlE=
-```
+    (django-sandbox) $ python
+    >>> from django.utils.crypto import pbkdf2
+    >>> import base64, hashlib
+    >>> algorithm = 'pbkdf2_sha256'
+    >>> iterations = 10000
+    >>> salt = 'yhmSGMwIMU0t'               # <<<< Pick your own random string instead of this one.
+    >>> plaintext_password = 'wirbelsturm'  # <<<< Use your own unencrypted password here.
+    >>> hash = pbkdf2(plaintext_password, salt, iterations, 32, hashlib.sha256).encode('base64').strip()
+    >>> hashed_password = '{algorithm}${iterations}${salt}${hash}'.format(algorithm=algorithm,iterations=iterations,salt=salt,hash=hash)
+    >>> print hashed_password
+    pbkdf2_sha256$10000$yhmSGMwIMU0t$HDegvfcy2i14qhQgWhDP7fL5Pf658Cfu065iv0e8YlE=
 
 You would then use `pbkdf2_sha256$10000$yhmSGMwIMU0t$HDegvfcy2i14qhQgWhDP7fL5Pf658Cfu065iv0e8YlE=` as the value for
 `graphite::web::admin_password`.
+
+Lastly we destroy our local Django sandbox as we do not need it anymore:
+
+    >>> exit()
+    (django-sandbox) $ deactivate
+    $ rm -rf /tmp/django-sandbox
 
 See [Password management in Django](https://docs.djangoproject.com/en/dev/topics/auth/passwords/).
 
