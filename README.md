@@ -98,6 +98,14 @@ First we will install Django in a local sandbox because we only need it to creat
     $ source bin/activate
     (django-sandbox) $ pip install django
 
+    # Now see below for how to encrypt a custom password.
+    # Once you are done, run the following command to leave
+    # and destroy the sandbox.
+    (django-sandbox) $ deactivate
+    $ rm -rf /tmp/django-sandbox
+
+Now you can use Python to encrypt your password:
+
 ```shell
 (django-sandbox) $ python
 >>> from django.utils.crypto import pbkdf2
