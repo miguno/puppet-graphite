@@ -86,6 +86,9 @@
 # * Richard Pijnenburg <mailto:richard@ispavailability.com>
 #
 class graphite::web(
+  $admin_email           = 'admin@example.com',
+  $admin_password        = 'pbkdf2_sha256$10000$yhmSGMwIMU0t$HDegvfcy2i14qhQgWhDP7fL5Pf658Cfu065iv0e8YlE=',
+  $admin_user            = 'admin',
   $apache_config_file    = "${module_name}/etc/httpd/conf.d/graphite-web.conf.erb",
   $autoupgrade           = $graphite::params::autoupgrade,
   $dashboard_config_file = "${module_name}/etc/graphite-web/dashboard.conf.erb",
@@ -98,9 +101,6 @@ class graphite::web(
   $server_name           = "${::fqdn}",
   $server_port           = 8080,
   $status                = $graphite::params::status,
-  $admin_user            = 'admin',
-  $admin_password        = 'pbkdf2_sha256$10000$yhmSGMwIMU0t$HDegvfcy2i14qhQgWhDP7fL5Pf658Cfu065iv0e8YlE=',
-  $admin_email           = 'admin@example.com',
   $use_hostname_server_alias = true,
   $version               = undef,
   $webserver_user        = 'apache',
