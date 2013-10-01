@@ -1,7 +1,5 @@
 class graphite::web::config {
 
-  #### Configuration
-
   file { '/etc/graphite-web':
     ensure => directory,
     owner  => 'root',
