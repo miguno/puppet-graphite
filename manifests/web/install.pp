@@ -19,7 +19,12 @@ class graphite::web::install {
     ensure => $package_ensure,
   }
 
+  package { $graphite::params::package_gunicorn:
+    ensure => $package_ensure,
+  }
+
   if $graphite::ensure == 'present' {
+
     file { 'graphite-db-dir':
       path    => '/var/lib/graphite-web',
       ensure  => directory,
@@ -62,6 +67,15 @@ class graphite::web::install {
       owner   => "$graphite::web::webserver_user",
       group   => "$graphite::web::webserver_group",
     }
+
+    file { $graphite::web::gunicorn_config:
+      ensure  => file,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      content => template($graphite::web::gunicorn_config_template),
+    }
+
   }
 
 }

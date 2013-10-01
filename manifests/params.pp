@@ -9,9 +9,13 @@ class graphite::params {
 
   case $::operatingsystem {
     'CentOS', 'Fedora', 'RedHat', 'Amazon' ,'Scientific': {
-      $package_carbon  = [ 'python-carbon' ]
-      $package_whisper = [ 'python-whisper' ]
-      $package_web     = [ 'graphite-web']
+      # TODO: Try to auto-detect location if possible
+      $graphite_pythonpath = '/usr/lib/python2.6/site-packages/graphite'
+      $managepy_path    = "${graphite_pythonpath}/manage.py"
+      $package_carbon   = [ 'python-carbon' ]
+      $package_gunicorn = [ 'python-gunicorn' ]
+      $package_whisper  = [ 'python-whisper' ]
+      $package_web      = [ 'graphite-web' ]
       $service_default_path     = '/etc/sysconfig'
       $service_cache_name       = 'carbon-cache'
       $service_cache_hasrestart = true
@@ -25,8 +29,6 @@ class graphite::params {
       $service_aggregator_hasrestart = true
       $service_aggregator_hasstatus  = true
       $service_aggregator_pattern    = $service_aggregator_name
-      # TODO: Try to auto-detect location of manage.py if possible
-      $managepy_path = '/usr/lib/python2.6/site-packages/graphite/manage.py'
     }
     default: {
       fail("'${module_name}' does not support operating system '${::operatingsystem}'")

@@ -96,6 +96,9 @@ class graphite::web(
   $db                    = '/var/lib/graphite-web/graphite.db',
   $db_init_file          = '/tmp/graphite_initial_data.json.json',
   $db_init_file_template = "${module_name}/initial_data.json.erb",
+  $gunicorn_config       = "/etc/graphite-web/gunicorn.conf.py"
+  $gunicorn_config_template = "${module_name}/etc/graphite-web/gunicorn.conf.py.erb"
+  $gunicorn_port         = 8081,
   $local_settings_file   = "${module_name}/etc/graphite-web/local_settings.py.erb",
   $server_name           = "${::fqdn}",
   $server_port           = 8080,
@@ -112,17 +115,16 @@ class graphite::web(
   validate_bool($autoupgrade)
   validate_string($dashboard_config_file)
   validate_string($django_secret_key)
-  if ! ($ensure in [ 'present', 'absent' ]) {
-    fail("\"${ensure}\" is not a valid ensure parameter value")
-  }
+  if ! ($ensure in [ 'present', 'absent' ]) { fail("\"${ensure}\" is not a valid ensure parameter value") }
   validate_absolute_path($db)
   validate_absolute_path($db_init_file)
   validate_string($db_init_file_template)
+  validate_absolute_path($gunicorn_config)
+  validate_string($gunicorn_config_template)
+  if !is_integer($gunicorn_port) { fail('The $gunicorn_port parameter must be an integer number') }
   validate_string($local_settings_file)
   validate_string($server_name)
-  if !is_integer($server_port) {
-    fail('The $server_port parameter must be an integer number')
-  }
+  if !is_integer($server_port) { fail('The $server_port parameter must be an integer number') }
   if ! ($status in [ 'enabled', 'disabled', 'running', 'unmanaged' ]) {
     fail("\"${status}\" is not a valid status parameter value")
   }
