@@ -53,7 +53,7 @@ class graphite::web::config {
 
   file { '/etc/httpd/conf.d/graphite-web.conf':
     ensure  => present,
-    content => template($graphite::web::web_apache_config_file),
+    content => template($graphite::web::apache_config_file),
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
@@ -63,7 +63,7 @@ class graphite::web::config {
   if ($graphite::status in ['enabled', 'running', 'unmanaged']) {
     if $graphite::firewall == true {
       firewall { '100 Graphite: allow access to Graphite web port':
-        port    => $graphite::web_server_port,
+        port    => $graphite::server_port,
         proto   => 'tcp',
         action  => 'accept',
         require => Class['::firewall'],

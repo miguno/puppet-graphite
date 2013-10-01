@@ -99,12 +99,6 @@ class graphite(
   $firewall                       = $graphite::params::firewall,
   $status                         = $graphite::params::status,
   $time_zone                      = $graphite::params::time_zone,
-  $web_apache_config_file         = $graphite::params::web_apache_config_file,
-  $web_dashboard_config_file      = $graphite::params::web_dashboard_config_file,
-  $web_local_settings_file        = $graphite::params::web_local_settings_file,
-  $web_server_name                = $graphite::params::web_server_name,
-  $web_server_port                = $graphite::params::web_server_port,
-  $web_use_hostname_server_alias  = $graphite::params::web_use_hostname_server_alias,
   $version                        = undef,
 ) inherits graphite::params {
 
@@ -122,19 +116,8 @@ class graphite(
   if ! ($status in [ 'enabled', 'disabled', 'running', 'unmanaged' ]) {
     fail("\"${status}\" is not a valid status parameter value")
   }
-  validate_string($web_apache_config_file)
-  validate_string($web_dashboard_config_file)
-  validate_string($web_local_settings_file)
-  validate_string($web_server_name)
-  if !is_integer($web_server_port) {
-    fail('The $web_server_port parameter must be an integer number')
-  }
-  else {
-    if $web_server_port == 80 {
-      fail('Right now the $web_server_port must not be 80, because otherwise we run into httpd config conflicts (TODO)')
-    }
-  }
-  validate_bool($web_use_hostname_server_alias)
+  validate_string($time_zone)
+  validate_string($version)
 
   #### Manage actions
 

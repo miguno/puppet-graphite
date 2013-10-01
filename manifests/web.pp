@@ -67,21 +67,21 @@
 # * Richard Pijnenburg <mailto:richard@ispavailability.com>
 #
 class graphite::web(
-  $apache_config_file    = $graphite::params::web_apache_config_file,
+  $apache_config_file    = "${module_name}/etc/httpd/conf.d/graphite-web.conf.erb",
   $autoupgrade           = $graphite::params::autoupgrade,
-  $dashboard_config_file = $graphite::params::web_dashboard_config_file,
+  $dashboard_config_file = "${module_name}/etc/graphite-web/dashboard.conf.erb",
   $ensure                = $graphite::params::ensure,
   $db                    = '/var/lib/graphite-web/graphite.db',
   $db_init_file          = '/tmp/graphite_initial_data.json.json',
   $db_init_file_template = "${module_name}/initial_data.json.erb",
-  $local_settings_file   = $graphite::params::web_local_settings_file,
-  $server_name           = $graphite::params::web_server_name,
-  $server_port           = $graphite::params::web_server_port,
+  $local_settings_file   = "${module_name}/etc/graphite-web/local_settings.py.erb",
+  $server_name           = "${::fqdn}",
+  $server_port           = 8080,
   $status                = $graphite::params::status,
   $admin_user            = 'admin',
   $admin_password        = 'pbkdf2_sha256$10000$yhmSGMwIMU0t$HDegvfcy2i14qhQgWhDP7fL5Pf658Cfu065iv0e8YlE=',
   $admin_email           = 'admin@example.com',
-  $use_hostname_server_alias = $graphite::params::web_use_hostname_server_alias,
+  $use_hostname_server_alias = true,
   $version               = undef,
 ) inherits graphite::params {
 
