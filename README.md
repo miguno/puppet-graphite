@@ -74,6 +74,39 @@ For the graphite-web there are 2 variables:
     web_dashboard_config_file => "${module_name}/etc/graphite-web/dashboard.conf.erb"
     web_local_settings_file   => "${module_name}/etc/graphite-web/local_settings.py.erb"
 
+The default superuser of the graphite-web application is user `admin` with password `wirbelsturm` and email address
+`admin@example.com`.
+
+
+### Create your own hashed password for the admin user of graphite-web
+
+You can define a custom superuser for graphite-web via the parameters:
+
+    $graphite::web::admin_user
+    $graphite::web::admin_password
+    $graphite::web::admin_email
+
+The password must be in an encrypted, hashed format.  You can use Python to create your own custom password as follows
+(you must have a recent version of Django installed locally).  The following example hashes (encrypts) the password
+`wirbelsturm` with a salt of `yhmSGMwIMU0t`.
+
+```shell
+>>> from django.utils.crypto import pbkdf2
+>>> import base64, hashlib
+>>> algorithm = 'pbkdf2_sha256'
+>>> iterations = 10000
+>>> salt = 'yhmSGMwIMU0t'
+>>> plaintext_password = 'wirbelsturm'
+>>> hash = pbkdf2(plaintext_password, salt, iterations, 32, hashlib.sha256).encode('base64').strip()
+>>> hashed_password = '{algorithm}${iterations}${salt}${hash}'.format(algorithm=algorithm,iterations=iterations,salt=salt,hash=hash)
+>>> print hashed_password
+pbkdf2_sha256$10000$yhmSGMwIMU0t$HDegvfcy2i14qhQgWhDP7fL5Pf658Cfu065iv0e8YlE=
+```
+
+You would then use `pbkdf2_sha256$10000$yhmSGMwIMU0t$HDegvfcy2i14qhQgWhDP7fL5Pf658Cfu065iv0e8YlE=` as the value for
+`graphite::web::admin_password`.
+
+See [Password management in Django](https://docs.djangoproject.com/en/dev/topics/auth/passwords/).
 
 
 ## whisper
