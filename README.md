@@ -132,6 +132,8 @@ This example was tested on RHEL 6.  It runs gunicorn on port `8081/tcp` for serv
 `8080/tcp` is acting as the main frontend that relays requests to gunicorn.  Note that the various `www_root` parameters
 are specific to the RedHat OS family.
 
+This example requires the Puppet module [puppet-nginx](https://github.com/jfryman/puppet-nginx) for managing nginx.
+
 ```yaml
 ---
 classes:
