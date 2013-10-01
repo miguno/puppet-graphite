@@ -83,6 +83,8 @@ class graphite::web(
   $admin_email           = 'admin@example.com',
   $use_hostname_server_alias = true,
   $version               = undef,
+  $webserver_user        = 'apache',
+  $webserver_group       = 'apache',
 ) inherits graphite::params {
 
   validate_string($admin_email)
@@ -107,6 +109,8 @@ class graphite::web(
   }
   validate_bool($use_hostname_server_alias)
   validate_string($version)
+  validate_string($webserver_user)
+  validate_string($webserver_group)
 
   class { 'graphite::web::install': }
   class { 'graphite::web::config': }

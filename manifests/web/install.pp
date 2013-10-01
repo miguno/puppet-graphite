@@ -29,6 +29,12 @@ class graphite::web::install {
       unless  => "test -f ${graphite::web::db}",
       require => [ Package[$graphite::params::package_web], File[$graphite::web::db_init_file] ],
     }
+    ->
+    file { $graphite::web::db:
+      ensure  => file,
+      owner   => "$graphite::web::webserver_user",
+      group   => "$graphite::web::webserver_group",
+    }
   }
   else {
     $package_ensure = 'purged'
