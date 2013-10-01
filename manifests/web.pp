@@ -96,8 +96,8 @@ class graphite::web(
   $db                    = '/var/lib/graphite-web/graphite.db',
   $db_init_file          = '/tmp/graphite_initial_data.json.json',
   $db_init_file_template = "${module_name}/initial_data.json.erb",
-  $gunicorn_config       = "/etc/graphite-web/gunicorn.conf.py"
-  $gunicorn_config_template = "${module_name}/etc/graphite-web/gunicorn.conf.py.erb"
+  $gunicorn_config       = "/etc/graphite-web/gunicorn.conf.py",
+  $gunicorn_config_template = "${module_name}/etc/graphite-web/gunicorn.conf.py.erb",
   $gunicorn_port         = 8081,
   $local_settings_file   = "${module_name}/etc/graphite-web/local_settings.py.erb",
   $server_name           = "${::fqdn}",
