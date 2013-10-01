@@ -126,6 +126,61 @@ Lastly we destroy our local Django sandbox as we do not need it anymore:
 See [Password management in Django](https://docs.djangoproject.com/en/dev/topics/auth/passwords/).
 
 
+### Example configuration with Nginx (using Hiera)
+
+This example was tested on RHEL 6.  It runs gunicorn on port `8081/tcp` for serving graphite-web, and nginx on port
+`8080/tcp` is acting as the main frontend that relays requests to gunicorn.  Note that the various `www_root` parameters
+are specific to the RedHat OS family.
+
+```yaml
+---
+classes:
+  - graphite
+  - nginx
+
+## Graphite
+#
+# Note: If clients connecting to carbon-cache are experiencing errors such as connection refused by the daemon, a common
+# reason is a shortage of file descriptors (ulimit -n).  A value of 8192 or more may be necessary depending on how many
+# clients are simultaneously connecting to the carbon-cache daemon.
+graphite::carbon_cache_enable: true
+graphite::web::admin_email: 'your.email@example.com'
+graphite::web::django_secret_key: 'kja0x0w3qdjf;kjtg098yh#%&ISZFGH'
+
+## Nginx
+nginx::nginx_upstreams:
+  'gunicorn_app_server':
+    ensure: present
+    members:
+      - 'localhost:8081 fail_timeout=0'
+nginx::nginx_vhosts:
+  '_':
+    www_root: '/usr/share/graphite/webapp/content'
+    ipv6_enable: false
+    listen_port: 8080
+    access_log: '/var/log/nginx/monitor1.access.log'
+    error_log:  '/var/log/nginx/monitor1.error.log'
+    vhost_cfg_append:
+      client_max_body_size: '64M'
+      keepalive_timeout: 5
+    location_cfg_append:
+      proxy_pass_header: 'Server'
+      proxy_redirect: 'off'
+      'proxy_set_header X-Real-IP': '$remote_addr'
+      'proxy_set_header Host': '$http_host'
+      'proxy_set_header X-Scheme': '$scheme'
+      proxy_connect_timeout: 10
+      proxy_read_timeout: 10
+      proxy_pass: 'http://gunicorn_app_server'
+nginx::nginx_locations:
+  'media':
+    vhost: '_'
+    location: '/media/'
+    www_root: '/usr/lib/python2.6/site-packages/django/contrib/admin'
+```
+
+
+
 ## whisper
 
 Whisper is the storage for all the data.
