@@ -25,6 +25,14 @@ class graphite::web::config {
     require => File['/etc/carbon']
   }
 
+  file { $graphite::web::gunicorn_config:
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template($graphite::web::gunicorn_config_template),
+  }
+
   if ($graphite::status in ['enabled', 'running', 'unmanaged']) {
     if $graphite::firewall == true {
       firewall { '100 Graphite: allow access to Graphite web port':

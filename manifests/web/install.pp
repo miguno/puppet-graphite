@@ -68,14 +68,6 @@ class graphite::web::install {
       group   => "$graphite::web::webserver_group",
     }
 
-    file { $graphite::web::gunicorn_config:
-      ensure  => file,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0644',
-      content => template($graphite::web::gunicorn_config_template),
-    }
-
   }
 
 }
