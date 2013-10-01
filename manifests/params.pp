@@ -31,6 +31,8 @@ class graphite::params {
       $service_aggregator_hasrestart = true
       $service_aggregator_hasstatus  = true
       $service_aggregator_pattern    = $service_aggregator_name
+      # TODO: Try to auto-detect location of manage.py if possible
+      $managepy_path = '/usr/lib/python2.6/site-packages/graphite/manage.py'
     }
     default: {
       fail("'${module_name}' does not support operating system '${::operatingsystem}'")
