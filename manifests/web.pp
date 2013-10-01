@@ -75,8 +75,6 @@ class graphite::web(
   $version               = undef,
 ) inherits graphite::params {
 
-  #### Validate parameters
-
   validate_string($apache_config_file)
   validate_bool($autoupgrade)
   validate_string($dashboard_config_file)
@@ -94,18 +92,10 @@ class graphite::web(
   validate_bool($use_hostname_server_alias)
   validate_string($version)
 
-  #### Manage actions
-
-  # package(s)
   class { 'graphite::web::package': }
-
-  # configuration
   class { 'graphite::web::config': }
 
-  #### Manage relationships
-
   if $ensure == 'present' {
-    # we need the software before configuring it
     Class['graphite::web::package'] -> Class['graphite::web::config']
   }
 
