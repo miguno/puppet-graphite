@@ -30,7 +30,26 @@
 #   Defaults to <tt>false</tt>.
 #
 # [*admin_password*]
-#   String.  The SHA256-hashed password of the admin user of graphite-web.
+#   String.  The hash of the password of the graphite-web admin user.  You must
+#   use the PBKDF2 algorithm with a SHA256 hash to properly hash the password.
+#
+#   You can use Python to create your own custom password  as follows (you must
+#   have a recent version of Django installed locally).  The following example
+#   hashes (encrypts) the password 'wirbelsturm' with a salt of 'yhmSGMwIMU0t'.
+#
+#   >>> from django.utils.crypto import pbkdf2
+#   >>> import base64, hashlib
+#   >>> algorithm = 'pbkdf2_sha256'
+#   >>> iterations = 10000
+#   >>> salt = 'yhmSGMwIMU0t'
+#   >>> plaintext_password = 'wirbelsturm'
+#   >>> hash = pbkdf2(plaintext_password, salt, iterations, 32, hashlib.sha256).encode('base64').strip()
+#   >>> hashed_password = '{algorithm}${iterations}${salt}${hash}'.format(algorithm=algorithm,iterations=iterations,salt=salt,hash=hash)
+#   >>> print hashed_password
+#   pbkdf2_sha256$10000$yhmSGMwIMU0t$HDegvfcy2i14qhQgWhDP7fL5Pf658Cfu065iv0e8YlE=
+#
+#   Q.v.:
+#   * {Password management in Django}[https://docs.djangoproject.com/en/dev/topics/auth/passwords/]
 #   Defaults to the hash of the password <tt>wirbelsturm</tt>.
 #
 # [*status*]
