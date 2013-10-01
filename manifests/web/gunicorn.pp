@@ -26,12 +26,12 @@ class graphite::web::gunicorn {
     }
 
     if $graphite::web::gunicorn_enable == true {
-      exec { "restart-gunicorn":
+      exec { 'restart-gunicorn':
         command     => "supervisorctl restart ${graphite::web::gunicorn_name}",
         path        => ["/usr/bin", "/usr/sbin", "/sbin", "/bin"],
         user        => 'root',
         refreshonly => true,
-        subscribe   => $graphite::web::gunicorn_config,
+        subscribe   => File[$graphite::web::gunicorn_config],
         onlyif      => "which supervisorctl &>/dev/null",
         require     => Class['::supervisor'],
       }
