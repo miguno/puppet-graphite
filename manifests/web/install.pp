@@ -10,7 +10,16 @@ class graphite::web::install {
     else {
       $package_ensure = $graphite::version
     }
+  }
+  else {
+    $package_ensure = 'purged'
+  }
 
+  package { $graphite::params::package_web:
+    ensure => $package_ensure,
+  }
+
+  if $graphite::ensure == 'present' {
     file { 'graphite-db-dir':
       path    => '/var/lib/graphite-web',
       ensure  => directory,
@@ -53,13 +62,6 @@ class graphite::web::install {
       owner   => "$graphite::web::webserver_user",
       group   => "$graphite::web::webserver_group",
     }
-  }
-  else {
-    $package_ensure = 'purged'
-  }
-
-  package { $graphite::params::package_web:
-    ensure => $package_ensure,
   }
 
 }
