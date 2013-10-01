@@ -102,8 +102,6 @@ class graphite(
   $version                        = undef,
 ) inherits graphite::params {
 
-  #### Validate parameters
-
   validate_bool($autoupgrade)
   if ! ($ensure in [ 'present', 'absent' ]) {
     fail("\"${ensure}\" is not a valid ensure parameter value")
@@ -118,8 +116,6 @@ class graphite(
   }
   validate_string($time_zone)
   validate_string($version)
-
-  #### Manage actions
 
   class { 'graphite::carbon':
     cache_enable      => $carbon_cache_enable,
