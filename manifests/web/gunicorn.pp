@@ -6,7 +6,7 @@ class graphite::web::gunicorn {
       $graphite::web::gunicorn_name:
         ensure                 => $graphite::web::gunicorn_ensure,
         enable                 => $graphite::web::gunicorn_enable,
-        command                => $graphite::web::command,
+        command                => $graphite::web::gunicorn_command,
         user                   => $graphite::web::webserver_user,
         group                  => $graphite::web::webserver_group,
         autorestart            => $graphite::web::gunicorn_autorestart,
@@ -18,7 +18,11 @@ class graphite::web::gunicorn {
         stdout_logfile_keep    => $graphite::web::gunicorn_stdout_logfile_keep,
         stderr_logfile_maxsize => $graphite::web::gunicorn_stderr_logfile_maxsize,
         stderr_logfile_keep    => $graphite::web::gunicorn_stderr_logfile_keep,
-        require                => [ File[$graphite::web::gunicorn_config], Class['::supervisor'] ],
+        require                => [
+                                    File[$graphite::web::gunicorn_config],
+                                    Package[$graphite::params::package_gunicorn],
+                                    Class['::supervisor'],
+                                  ],
     }
 
     if $graphite::web::gunicorn_enable == true {

@@ -97,7 +97,6 @@ class graphite(
   $carbon_aggregator_default_file = undef,
   $ensure                         = $graphite::params::ensure,
   $firewall                       = $graphite::params::firewall,
-  $package_gunicorn               = $graphite::params::package_gunicorn,
   $status                         = $graphite::params::status,
   $time_zone                      = $graphite::params::time_zone,
   $version                        = undef,
@@ -112,7 +111,6 @@ class graphite(
   validate_bool($carbon_aggregator_enable)
   validate_string($carbon_config_file)
   validate_bool($firewall)
-  validate_array($package_gunicorn)
   if ! ($status in [ 'enabled', 'disabled', 'running', 'unmanaged' ]) {
     fail("\"${status}\" is not a valid status parameter value")
   }

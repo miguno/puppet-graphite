@@ -99,6 +99,7 @@ class graphite::web(
   $gunicorn_autorestart    = true,
   $gunicorn_config       = "/etc/graphite-web/gunicorn.conf.py",
   $gunicorn_config_template = "${module_name}/etc/graphite-web/gunicorn.conf.py.erb",
+  $gunicorn_command      = "gunicorn_django -c ${gunicorn_config}",
   $gunicorn_enable         = true,
   $gunicorn_ensure         = 'present',
   $gunicorn_manage         = true,
@@ -133,6 +134,7 @@ class graphite::web(
   validate_absolute_path($db_init_file)
   validate_string($db_init_file_template)
   validate_bool($gunicorn_autorestart)
+  validate_string($gunicorn_command)
   validate_absolute_path($gunicorn_config)
   validate_string($gunicorn_config_template)
   validate_bool($gunicorn_enable)
