@@ -20,6 +20,15 @@ class graphite::web::install {
       require => Package[$graphite::params::package_web],
     }
 
+    file { 'graphite-log-dir':
+      path    => '/var/log/graphite-web',
+      ensure  => directory,
+      owner   => "${graphite::web::webserver_user}",
+      group   => "${graphite::web::webserver_group}",
+      mode    => '0755',
+      require => Package[$graphite::params::package_web],
+    }
+
     file { $graphite::web::db_init_file:
       ensure  => file,
       owner   => 'root',
@@ -36,7 +45,7 @@ class graphite::web::install {
       command => "python ${graphite::web::managepy_path} syncdb --noinput && python ${graphite::web::managepy_path} loaddata ${graphite::web::db_init_file}",
       path    => ['/usr/bin', '/usr/sbin', '/sbin', '/bin'],
       unless  => "test -f ${graphite::web::db}",
-      require => [ File['graphite-db-dir'], File[$graphite::web::db_init_file] ],
+      require => [ File['graphite-db-dir'], [ File['graphite-log-dir'], File[$graphite::web::db_init_file] ],
     }
     ->
     file { $graphite::web::db:
