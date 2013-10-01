@@ -1,6 +1,10 @@
 class graphite::web::gunicorn {
 
-  if $graphite::ensure == 'present' {
+  if !($gunicorn_ensure in ['present', 'absent']) {
+    fail("gunicorn_ensure parameter must be 'present' or 'absent'")
+  }
+
+  if $graphite::ensure == 'present' and $gunicorn_manage == true {
 
     supervisor::service {
       $graphite::web::gunicorn_name:
