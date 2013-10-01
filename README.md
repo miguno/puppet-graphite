@@ -90,7 +90,16 @@ The password must be in an encrypted, hashed format.  You can use Python to crea
 (you must have a recent version of Django installed locally).  The following example hashes (encrypts) the password
 `wirbelsturm` with a salt of `yhmSGMwIMU0t`.
 
+First we will install Django in a local sandbox because we only need it to create hashed passwords:
+
+    $ sudo pip install virtualenv
+    $ virtualenv /tmp/django-sandbox
+    $ cd /tmp/django-sandbox
+    $ source bin/activate
+    (django-sandbox) $ pip install django
+
 ```shell
+(django-sandbox) $ python
 >>> from django.utils.crypto import pbkdf2
 >>> import base64, hashlib
 >>> algorithm = 'pbkdf2_sha256'
