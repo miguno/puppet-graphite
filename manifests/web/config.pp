@@ -25,6 +25,14 @@ class graphite::web::config {
     require => File['/etc/carbon']
   }
 
+  file { '/var/lib/graphite-web':
+    ensure  => directory,
+    owner   => "${graphite::web::webserver_user}",
+    group   => "${graphite::web::webserver_group}",
+    mode    => '0755',
+    require => Package[$package_web],
+  }
+
   if ($graphite::status in ['enabled', 'running', 'unmanaged']) {
     if $graphite::firewall == true {
       firewall { '100 Graphite: allow access to Graphite web port':
