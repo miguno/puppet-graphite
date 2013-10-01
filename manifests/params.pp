@@ -60,12 +60,6 @@ class graphite::params {
       $package_whisper = [ 'python-whisper' ]
       $package_web     = [ 'graphite-web']
     }
-    'Debian', 'Ubuntu': {
-      # main application
-      $package_carbon  = [ 'graphite-carbon' ]
-      $package_whisper = [ 'python-whisper' ]
-      $package_web     = [ 'graphite-web' ] # available since Debian Jessie
-    }
     default: {
       fail("'${module_name}' provides no package default value for '${::operatingsystem}'")
     }
@@ -75,25 +69,6 @@ class graphite::params {
   case $::operatingsystem {
     'CentOS', 'Fedora', 'Scientific': {
       $service_default_path     = '/etc/sysconfig'
-
-      $service_cache_name       = 'carbon-cache'
-      $service_cache_hasrestart = true
-      $service_cache_hasstatus  = true
-      $service_cache_pattern    = $service_cache_name
-
-      $service_relay_name       = 'carbon-relay'
-      $service_relay_hasrestart = true
-      $service_relay_hasstatus  = true
-      $service_relay_pattern    = $service_relay_name
-
-      $service_aggregator_name       = 'carbon-aggregator'
-      $service_aggregator_hasrestart = true
-      $service_aggregator_hasstatus  = true
-      $service_aggregator_pattern    = $service_aggregator_name
-
-    }
-    'Debian', 'Ubuntu': {
-      $service_default_path     = '/etc/default'
 
       $service_cache_name       = 'carbon-cache'
       $service_cache_hasrestart = true
