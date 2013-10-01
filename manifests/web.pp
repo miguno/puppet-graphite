@@ -92,11 +92,11 @@ class graphite::web(
   validate_bool($use_hostname_server_alias)
   validate_string($version)
 
-  class { 'graphite::web::package': }
+  class { 'graphite::web::install': }
   class { 'graphite::web::config': }
 
   if $ensure == 'present' {
-    Class['graphite::web::package'] -> Class['graphite::web::config']
+    Class['graphite::web::install'] -> Class['graphite::web::config']
   }
 
 }
