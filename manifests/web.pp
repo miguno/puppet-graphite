@@ -96,17 +96,30 @@ class graphite::web(
   $db                    = '/var/lib/graphite-web/graphite.db',
   $db_init_file          = '/tmp/graphite_initial_data.json.json',
   $db_init_file_template = "${module_name}/initial_data.json.erb",
+  $gunicorn_autorestart    = true,
   $gunicorn_config       = "/etc/graphite-web/gunicorn.conf.py",
   $gunicorn_config_template = "${module_name}/etc/graphite-web/gunicorn.conf.py.erb",
+  $gunicorn_enable         = true,
+  $gunicorn_ensure         = 'present',
+  $gunicorn_manage         = true,
+  $gunicorn_name           = 'gunicorn',
+  $gunicorn_retries        = 999,
+  $gunicorn_startsecs      = 10,
+  $gunicorn_stderr_logfile_keep    = 10,
+  $gunicorn_stderr_logfile_maxsize = '20MB',
+  $gunicorn_stdout_logfile_keep    = 5,
+  $gunicorn_stdout_logfile_maxsize = '20MB',
+  $gunicorn_stopasgroup    = false,
+  $gunicorn_stopsignal     = 'TERM',
   $gunicorn_port         = 8081,
   $local_settings_file   = "${module_name}/etc/graphite-web/local_settings.py.erb",
-  $server_name           = "${::fqdn}",
-  $server_port           = 8080,
   $status                = $graphite::params::status,
   $use_hostname_server_alias = true,
   $version               = undef,
-  $webserver_user        = 'nginx',
   $webserver_group       = 'nginx',
+  $webserver_name           = "${::fqdn}",
+  $webserver_port           = 8080,
+  $webserver_user        = 'nginx',
 ) inherits graphite::params {
 
   validate_string($admin_email)
@@ -119,25 +132,41 @@ class graphite::web(
   validate_absolute_path($db)
   validate_absolute_path($db_init_file)
   validate_string($db_init_file_template)
+  validate_bool($gunicorn_autorestart)
   validate_absolute_path($gunicorn_config)
   validate_string($gunicorn_config_template)
+  validate_bool($gunicorn_enable)
+  validate_string($gunicorn_ensure)
+  validate_bool($gunicorn_manage)
+  validate_string($gunicorn_name)
+  if !is_integer($gunicorn_retries) { fail('The $gunicorn_retries parameter must be an integer number') }
+  if !is_integer($gunicorn_startsecs) { fail('The $gunicorn_startsecs parameter must be an integer number') }
+  if !is_integer($gunicorn_stderr_logfile_keep) {                                                                            fail('The $gunicorn_stderr_logfile_keep parameter must be an integer number')
+  }
+  validate_string($gunicorn_stderr_logfile_maxsize)
+  if !is_integer($gunicorn_stdout_logfile_keep) {                                                                            fail('The $gunicorn_stdout_logfile_keep parameter must be an integer number')
+  }
+  validate_string($gunicorn_stdout_logfile_maxsize)
+  validate_bool($gunicorn_stopasgroup)
+  validate_string($gunicorn_stopsignal)
   if !is_integer($gunicorn_port) { fail('The $gunicorn_port parameter must be an integer number') }
   validate_string($local_settings_file)
-  validate_string($server_name)
-  if !is_integer($server_port) { fail('The $server_port parameter must be an integer number') }
   if ! ($status in [ 'enabled', 'disabled', 'running', 'unmanaged' ]) {
     fail("\"${status}\" is not a valid status parameter value")
   }
   validate_bool($use_hostname_server_alias)
   validate_string($version)
-  validate_string($webserver_user)
   validate_string($webserver_group)
+  validate_string($webserver_name)
+  if !is_integer($webserver_port) { fail('The $webserver_port parameter must be an integer number') }
+  validate_string($webserver_user)
 
   class { 'graphite::web::install': }
   class { 'graphite::web::config': }
+  class { 'graphite::web::gunicorn': }
 
   if $ensure == 'present' {
-    Class['graphite::web::install'] -> Class['graphite::web::config']
+    Class['graphite::web::install'] -> Class['graphite::web::config'] ~> Class['graphite::web::gunicorn']
   }
 
 }
