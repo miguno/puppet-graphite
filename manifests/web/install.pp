@@ -24,7 +24,7 @@ class graphite::web::install {
     #    <...enter example data...>
     # $ python manage.py dumpdata --indent=2 auth > initial_data.json
     exec { 'create-database':
-      command => "python ${managepy_path} syncdb --noinput && python ${managepy_path} loaddata ${graphite::web::db_init_file}",
+      command => "python ${graphite::web::managepy_path} syncdb --noinput && python ${graphite::web::managepy_path} loaddata ${graphite::web::db_init_file}",
       path    => ['/usr/bin', '/usr/sbin', '/sbin', '/bin'],
       unless  => "test -f ${graphite::web::db}",
       require => [ Package[$graphite::params::package_web], File[$graphite::web::db_init_file] ],
