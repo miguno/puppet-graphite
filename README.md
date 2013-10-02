@@ -53,6 +53,8 @@ Command line example:
     # Format is "<metric> <value> <timestamp>"
     $ echo "local.random.diceroll 4 `date +%s`" | nc localhost 2003
 
+See [Feeding Carbon](https://graphite.readthedocs.org/en/latest/feeding-carbon.html) for more information.
+
 
 ### relay
 
