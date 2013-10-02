@@ -45,6 +45,14 @@ Common config variables:
 
      carbon_cache_enable => true
 
+Once carbon-cache is running you can send metrics to it via e.g. port `2003/tcp` (default for the line
+receiver port of carbon-cache).
+
+Command line example:
+
+    # Format is "<metric> <value> <timestamp>"
+    $ echo "local.random.diceroll 4 `date +%s`" | nc localhost 2003
+
 
 ### relay
 
