@@ -162,7 +162,7 @@ graphite::web::django_secret_key: 'kja0x0w3qdjf;kjtg098yh#%&ISZFGH'
 ## Nginx
 nginx::nginx_upstreams:
   'gunicorn_app_server':
-    ensure: present
+    ensure: 'present'
     members:
       - 'localhost:8081 fail_timeout=0'
 nginx::nginx_vhosts:
