@@ -1,3 +1,7 @@
+#
+# This file is managed by Puppet.
+#
+
 mode = 'django'
 bind = '127.0.0.1:<%= scope.lookupvar('graphite::web::gunicorn_port') %>'
 pythonpath = '<%= scope.lookupvar('graphite::web::graphite_pythonpath') %>'
