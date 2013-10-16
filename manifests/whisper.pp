@@ -55,9 +55,6 @@
 # technical information about them.
 #
 #
-# === Examples
-#
-#
 # === Authors
 #
 # * Richard Pijnenburg <mailto:richard@ispavailability.com>
@@ -69,9 +66,6 @@ class graphite::whisper(
   $version     = undef,
 ) inherits graphite::params {
 
-  #### Validate parameters
-
-  validate_bool($autoupgrade)
   if ! ($ensure in [ 'present', 'absent' ]) {
     fail("\"${ensure}\" is not a valid ensure parameter value")
   }
@@ -81,9 +75,6 @@ class graphite::whisper(
   }
   validate_string($version)
 
-  #### Manage actions
-
-  # package(s)
   class { 'graphite::whisper::package': }
 
 }

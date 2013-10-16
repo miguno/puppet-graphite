@@ -1,8 +1,6 @@
 class graphite::params {
 
   $autoupgrade = false
-  $aggregator_config_template = "${module_name}/etc/carbon/aggregation-rules.conf.erb"
-  $carbon_config_template     = "${module_name}/etc/carbon/carbon.conf.erb"
   $ensure      = 'present'
   $firewall    = false
   $status      = 'enabled'
