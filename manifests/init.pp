@@ -85,12 +85,6 @@
 #
 class graphite(
   $autoupgrade                    = $graphite::params::autoupgrade,
-  $carbon_cache_init_file         = undef,
-  $carbon_cache_default_file      = undef,
-  $carbon_relay_init_file         = undef,
-  $carbon_relay_default_file      = undef,
-  $carbon_aggregator_init_file    = undef,
-  $carbon_aggregator_default_file = undef,
   $ensure                         = $graphite::params::ensure,
   $firewall                       = $graphite::params::firewall,
   $status                         = $graphite::params::status,
@@ -110,12 +104,7 @@ class graphite(
   validate_string($version)
 
   class { 'graphite::carbon': }
-
   class { 'graphite::whisper': }
-
-  class { 'graphite::web':
-    dashboard_config_file => $web_dashboard_config_file,
-    local_settings_file   => $web_local_settings_file,
-  }
+  class { 'graphite::web': }
 
 }

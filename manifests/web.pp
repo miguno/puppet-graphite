@@ -78,28 +78,25 @@
 # technical information about them.
 #
 #
-# === Examples
-#
-#
 # === Authors
 #
 # * Richard Pijnenburg <mailto:richard@ispavailability.com>
 #
 class graphite::web(
-  $admin_email           = 'admin@example.com',
-  $admin_password        = 'pbkdf2_sha256$10000$yhmSGMwIMU0t$HDegvfcy2i14qhQgWhDP7fL5Pf658Cfu065iv0e8YlE=',
-  $admin_user            = 'admin',
-  $autoupgrade           = $graphite::params::autoupgrade,
-  $dashboard_config_file = "${module_name}/etc/graphite-web/dashboard.conf.erb",
-  $django_secret_key     = 'UNSAFE_DEFAULT',
-  $ensure                = $graphite::params::ensure,
-  $db                    = '/var/lib/graphite-web/graphite.db',
-  $db_init_file          = '/tmp/graphite_initial_data.json.json',
-  $db_init_file_template = "${module_name}/initial_data.json.erb",
+  $admin_email             = 'admin@example.com',
+  $admin_password          = 'pbkdf2_sha256$10000$yhmSGMwIMU0t$HDegvfcy2i14qhQgWhDP7fL5Pf658Cfu065iv0e8YlE=',
+  $admin_user              = 'admin',
+  $autoupgrade             = $graphite::params::autoupgrade,
+  $dashboard_config_template       = "${module_name}/etc/graphite-web/dashboard.conf.erb",
+  $django_secret_key       = 'UNSAFE_DEFAULT',
+  $ensure                  = $graphite::params::ensure,
+  $db                      = '/var/lib/graphite-web/graphite.db',
+  $db_init_file            = '/tmp/graphite_initial_data.json.json',
+  $db_init_file_template   = "${module_name}/initial_data.json.erb",
   $gunicorn_autorestart    = true,
-  $gunicorn_config       = "/etc/graphite-web/gunicorn.conf.py",
-  $gunicorn_config_template = "${module_name}/etc/graphite-web/gunicorn.conf.py.erb",
-  $gunicorn_command      = "gunicorn_django -c /etc/graphite-web/gunicorn.conf.py",
+  $gunicorn_config         = "/etc/graphite-web/gunicorn.conf.py",
+  $gunicorn_config_template        = "${module_name}/etc/graphite-web/gunicorn.conf.py.erb",
+  $gunicorn_command        = "gunicorn_django -c /etc/graphite-web/gunicorn.conf.py",
   $gunicorn_enable         = true,
   $gunicorn_ensure         = 'present',
   $gunicorn_manage         = true,
@@ -112,21 +109,21 @@ class graphite::web(
   $gunicorn_stdout_logfile_maxsize = '20MB',
   $gunicorn_stopasgroup    = false,
   $gunicorn_stopsignal     = 'TERM',
-  $gunicorn_port         = 8081,
-  $local_settings_file   = "${module_name}/etc/graphite-web/local_settings.py.erb",
-  $status                = $graphite::params::status,
+  $gunicorn_port           = 8081,
+  $local_settings_template = "${module_name}/etc/graphite-web/local_settings.py.erb",
+  $status                  = $graphite::params::status,
   $use_hostname_server_alias = true,
-  $version               = undef,
-  $webserver_group       = 'nginx',
-  $webserver_port           = 8080,
-  $webserver_user        = 'nginx',
+  $version                 = undef,
+  $webserver_group         = 'nginx',
+  $webserver_port          = 8080,
+  $webserver_user          = 'nginx',
 ) inherits graphite::params {
 
   validate_string($admin_email)
   validate_string($admin_password)
   validate_string($admin_user)
   validate_bool($autoupgrade)
-  validate_string($dashboard_config_file)
+  validate_string($dashboard_config_template)
   validate_string($django_secret_key)
   if ! ($ensure in [ 'present', 'absent' ]) { fail("\"${ensure}\" is not a valid ensure parameter value") }
   validate_absolute_path($db)
@@ -151,7 +148,7 @@ class graphite::web(
   validate_bool($gunicorn_stopasgroup)
   validate_string($gunicorn_stopsignal)
   if !is_integer($gunicorn_port) { fail('The $gunicorn_port parameter must be an integer number') }
-  validate_string($local_settings_file)
+  validate_string($local_settings_template)
   if ! ($status in [ 'enabled', 'disabled', 'running', 'unmanaged' ]) {
     fail("\"${status}\" is not a valid status parameter value")
   }

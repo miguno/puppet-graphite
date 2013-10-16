@@ -1,4 +1,4 @@
-class graphite::carbon::aggregator::service {
+class graphite::carbon::aggregator::service inherits graphite::carbon::aggregator::params {
 
   if $graphite::ensure == 'present' {
 
@@ -38,27 +38,27 @@ class graphite::carbon::aggregator::service {
     $service_enable = false
   }
 
-  if ($graphite::carbon_aggregator_init_file != undef) {
+  if ($init_file != undef) {
     file { 'carbon_aggregator_init_file':
       ensure => present,
       path   => '/etc/init.d/carbon-aggregator',
       owner  => 'root',
       group  => 'root',
       mode   => '0755',
-      source => $graphite::carbon_aggregator_init_file,
-      before => Service['carbon-aggregator'];
+      source => $init_file,
+      before => Service['carbon-aggregator'],
     }
   }
 
-  if ($graphite::carbon_aggregator_default_file != undef) {
+  if ($default_file != undef) {
     file { 'carbon_aggregator_default_file':
       ensure => present,
       path   => "${graphite::params::service_default_path}/carbon-aggregator",
       owner  => 'root',
       group  => 'root',
       mode   => '0644',
-      source => $graphite::carbon_aggregator_default_file,
-      before => Service['carbon-aggregator'];
+      source => $default_file,
+      before => Service['carbon-aggregator'],
     }
   }
 

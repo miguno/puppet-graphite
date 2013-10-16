@@ -9,7 +9,7 @@ class graphite::web::config {
 
   file { '/etc/graphite-web/local_settings.py':
     ensure  => present,
-    content => template($graphite::web::local_settings_file),
+    content => template($graphite::web::local_settings_template),
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
@@ -18,7 +18,7 @@ class graphite::web::config {
 
   file { '/etc/graphite-web/dashboard.conf':
     ensure  => present,
-    content => template($graphite::web::dashboard_config_file),
+    content => template($graphite::web::dashboard_config_template),
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
