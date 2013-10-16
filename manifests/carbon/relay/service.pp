@@ -81,6 +81,7 @@ class graphite::carbon::relay::service inherits graphite::carbon::relay::params 
     hasstatus  => $graphite::params::service_relay_hasstatus,
     hasrestart => $graphite::params::service_relay_hasrestart,
     pattern    => $graphite::params::service_relay_pattern,
+    subscribe  => File['carbon-main-config'],
   }
 
 }
