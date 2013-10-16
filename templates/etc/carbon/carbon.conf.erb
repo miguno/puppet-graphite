@@ -167,7 +167,6 @@ WHISPER_AUTOFLUSH = False
 # You can then specify the --instance=b option to manage this instance
 
 
-
 [relay]
 LINE_RECEIVER_INTERFACE = 0.0.0.0
 LINE_RECEIVER_PORT = <%= scope.lookupvar('graphite::carbon::relay_line_receiver_port') %>
@@ -238,7 +237,7 @@ PICKLE_RECEIVER_PORT = 2024
 # use multiple carbon-cache instances then it would look like this:
 #
 # DESTINATIONS = 127.0.0.1:2004:a, 127.0.0.1:2104:b
-# 
+#
 # The format is comma-delimited IP:PORT:INSTANCE where the :INSTANCE part is
 # optional and refers to the "None" instance if omitted.
 #
