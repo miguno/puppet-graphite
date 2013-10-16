@@ -39,7 +39,8 @@ class graphite::carbon::config {
     order   => 01,
   }
 
-  file_concat { '/etc/carbon/storage-schemas.conf':
+  file_concat { 'carbon-storage-schemas':
+    path    => '/etc/carbon/storage-schemas.conf',
     tag     => "carbon_cache_storage_config_${::fqdn}",
     owner   => 'root',
     group   => 'root',

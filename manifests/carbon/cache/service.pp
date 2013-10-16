@@ -86,6 +86,7 @@ class graphite::carbon::cache::service inherits graphite::carbon::cache::params 
     hasstatus  => $graphite::params::service_cache_hasstatus,
     hasrestart => $graphite::params::service_cache_hasrestart,
     pattern    => $graphite::params::service_cache_pattern,
+    subscribe  => [ File['carbon-main-config'], File_concat['carbon-storage-schemas'] ]
   }
 
 }
