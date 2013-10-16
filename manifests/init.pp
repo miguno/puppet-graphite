@@ -85,10 +85,6 @@
 #
 class graphite(
   $autoupgrade                    = $graphite::params::autoupgrade,
-  $carbon_cache_enable            = false,
-  $carbon_relay_enable            = false,
-  $carbon_aggregator_enable       = false,
-  $carbon_config_file             = $graphite::params::carbon_config_file,
   $carbon_cache_init_file         = undef,
   $carbon_cache_default_file      = undef,
   $carbon_relay_init_file         = undef,
@@ -106,10 +102,6 @@ class graphite(
   if ! ($ensure in [ 'present', 'absent' ]) {
     fail("\"${ensure}\" is not a valid ensure parameter value")
   }
-  validate_bool($carbon_cache_enable)
-  validate_bool($carbon_relay_enable)
-  validate_bool($carbon_aggregator_enable)
-  validate_string($carbon_config_file)
   validate_bool($firewall)
   if ! ($status in [ 'enabled', 'disabled', 'running', 'unmanaged' ]) {
     fail("\"${status}\" is not a valid status parameter value")
@@ -117,12 +109,7 @@ class graphite(
   validate_string($time_zone)
   validate_string($version)
 
-  class { 'graphite::carbon':
-    cache_enable      => $carbon_cache_enable,
-    relay_enable      => $carbon_relay_enable,
-    aggregator_enable => $carbon_aggregator_enable,
-    config_file       => $carbon_config_file,
-  }
+  class { 'graphite::carbon': }
 
   class { 'graphite::whisper': }
 

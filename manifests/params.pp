@@ -1,11 +1,12 @@
 class graphite::params {
 
-  $autoupgrade        = false
-  $carbon_config_file = "${module_name}/etc/carbon/carbon.conf.erb"
-  $ensure             = 'present'
-  $firewall           = false
-  $status             = 'enabled'
-  $time_zone          = "America/New_York" # see http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  $autoupgrade = false
+  $aggregator_config_template = "${module_name}/etc/carbon/aggregation-rules.conf.erb"
+  $carbon_config_template     = "${module_name}/etc/carbon/carbon.conf.erb"
+  $ensure      = 'present'
+  $firewall    = false
+  $status      = 'enabled'
+  $time_zone   = "America/New_York" # see http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
   case $::operatingsystem {
     'CentOS', 'Fedora', 'RedHat', 'Amazon' ,'Scientific': {

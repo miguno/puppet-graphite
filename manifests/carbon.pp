@@ -1,3 +1,5 @@
+# TODO: Update the documentation of this class to match the actual code.
+#
 # == Class: graphite::carbon
 #
 # This class is able to install or remove graphite carbon cache on a node.
@@ -53,24 +55,17 @@
 # The default values for the parameters are set in graphite::params. Have
 # a look at the corresponding <tt>params.pp</tt> manifest file if you need more
 # technical information about them.
-#
-#
-# === Examples
-#
-#
-# === Authors
-#
-# * Richard Pijnenburg <mailto:richard@ispavailability.com>
-#
 class graphite::carbon(
   $aggregator_enable = false,
+  $aggregator_config_template   = $graphite::params::aggregator_config_template,
+  $aggregator_rules  = [],
   $autoupgrade       = $graphite::params::autoupgrade,
   $cache_enable      = false,
   $cache_line_receiver_port     = 2003,
-  $cache_max_creates_per_minute =  50,
-  $cache_max_updates_per_second = 500,
+  $cache_max_creates_per_minute =   50,
+  $cache_max_updates_per_second =  500,
   $cache_query_port  = 7002,
-  $config_file       = $graphite::params::carbon_config_file,
+  $carbon_config_template       = $graphite::params::carbon_config_template,
   $ensure            = $graphite::params::ensure,
   $relay_enable      = false,
   $relay_line_receiver_port     = 2013,
@@ -78,9 +73,9 @@ class graphite::carbon(
   $version           = undef,
 ) inherits graphite::params {
 
-  #### Validate parameters
-
   validate_bool($aggregator_enable)
+  validate_string($aggregator_config_template)
+  validate_array($aggregator_rules)
   validate_bool($autoupgrade)
   validate_bool($cache_enable)
   if !is_integer($cache_line_receiver_port) { fail('The $cache_line_receiver_port parameter must be an integer number') }
@@ -91,7 +86,7 @@ class graphite::carbon(
     fail('The $cache_max_updates_per_second parameter must be an integer number')
   }
   if !is_integer($cache_query_port) { fail('The $cache_query_port parameter must be an integer number') }
-  validate_string($config_file)
+  validate_string($carbon_config_template)
   if ! ($ensure in [ 'present', 'absent' ]) {
     fail("\"${ensure}\" is not a valid ensure parameter value")
   }
@@ -147,12 +142,11 @@ class graphite::carbon(
       retentions => '60s:1d'
     }
 
-    # we need the software before configuring it
+    # We need the software before configuring it.
     Class['graphite::carbon::package'] -> Class['graphite::carbon::config']
-
-  } else {
-
-    # make sure all services are getting stopped before software removal
+  }
+  else {
+    # Make sure all services are getting stopped before software removal.
     if $cache_enable == true {
       Class['graphite::carbon::cache::service'] -> Class['graphite::carbon::package']
     }
@@ -164,7 +158,6 @@ class graphite::carbon(
     if $aggregator_enable == true {
       Class['graphite::carbon::aggregator::service'] -> Class['graphite::carbon::package']
     }
-
   }
 
 }
