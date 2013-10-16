@@ -20,7 +20,8 @@ class graphite::carbon::config {
 
   ### carbon-aggregator
 
-  file { '/etc/carbon/aggregation-rules.conf':
+  file { 'aggregator-config':
+    path    => '/etc/carbon/aggregation-rules.conf',
     ensure  => file,
     content => template("$graphite::carbon::aggregator_config_template"),
     owner   => 'root',
