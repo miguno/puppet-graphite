@@ -81,7 +81,7 @@ class graphite::carbon::aggregator::service inherits graphite::carbon::aggregato
     hasstatus  => $graphite::params::service_aggregator_hasstatus,
     hasrestart => $graphite::params::service_aggregator_hasrestart,
     pattern    => $graphite::params::service_aggregator_pattern,
-    subscribe  => File['aggregator-config'],
+    subscribe  => [ File['carbon-main-config'], File['aggregator-config'] ],
   }
 
 }

@@ -9,7 +9,8 @@ class graphite::carbon::config {
     mode   => '0644',
   }
 
-  file { '/etc/carbon/carbon.conf':
+  file { 'carbon-main-config':
+    path    => '/etc/carbon/carbon.conf',
     ensure  => present,
     content => template("$graphite::carbon::carbon_config_template"),
     owner   => 'root',
