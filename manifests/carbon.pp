@@ -56,29 +56,35 @@
 # a look at the corresponding <tt>params.pp</tt> manifest file if you need more
 # technical information about them.
 class graphite::carbon(
+  $aggregator_config_template    = "${module_name}/etc/carbon/aggregation-rules.conf.erb",
   $aggregator_enable = false,
-  $aggregator_config_template   = "${module_name}/etc/carbon/aggregation-rules.conf.erb",
+  $aggregator_line_receiver_port = 2023,
   $aggregator_rules  = [],
   $autoupgrade       = $graphite::params::autoupgrade,
   $cache_enable      = false,
-  $cache_line_receiver_port     = 2003,
-  $cache_max_creates_per_minute =   50,
-  $cache_max_updates_per_second =  500,
+  $cache_line_receiver_port      = 2003,
+  $cache_max_creates_per_minute  =   50,
+  $cache_max_updates_per_second  =  500,
   $cache_query_port  = 7002,
-  $carbon_config_template       = "${module_name}/etc/carbon/carbon.conf.erb",
+  $carbon_config_template        = "${module_name}/etc/carbon/carbon.conf.erb",
   $ensure            = $graphite::params::ensure,
   $relay_enable      = false,
-  $relay_line_receiver_port     = 2013,
+  $relay_line_receiver_port      = 2013,
   $status            = $graphite::params::status,
   $version           = undef,
 ) inherits graphite::params {
 
-  validate_bool($aggregator_enable)
   validate_string($aggregator_config_template)
+  validate_bool($aggregator_enable)
+  if !is_integer($aggregator_line_receiver_port) {
+    fail('The $aggregator_line_receiver_port parameter must be an integer number')
+  }
   validate_array($aggregator_rules)
   validate_bool($autoupgrade)
   validate_bool($cache_enable)
-  if !is_integer($cache_line_receiver_port) { fail('The $cache_line_receiver_port parameter must be an integer number') }
+  if !is_integer($cache_line_receiver_port) {
+    fail('The $cache_line_receiver_port parameter must be an integer number')
+  }
   if !is_integer($cache_max_creates_per_minute) {
     fail('The $cache_max_creates_per_minute parameter must be an integer number')
   }

@@ -226,7 +226,7 @@ USE_FLOW_CONTROL = True
 
 [aggregator]
 LINE_RECEIVER_INTERFACE = 0.0.0.0
-LINE_RECEIVER_PORT = 2023
+LINE_RECEIVER_PORT = <%= scope.lookupvar('graphite::carbon::aggregator_line_receiver_port') %>
 
 PICKLE_RECEIVER_INTERFACE = 0.0.0.0
 PICKLE_RECEIVER_PORT = 2024

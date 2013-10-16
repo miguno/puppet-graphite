@@ -30,6 +30,18 @@ class graphite::carbon::aggregator::service inherits graphite::carbon::aggregato
         fail("\"${graphite::status}\" is an unknown service status value")
       }
     }
+
+    if ($graphite::status in ['enabled', 'running', 'unmanaged']) {
+      if $graphite::firewall == true {
+        firewall { '101 Graphite: allow access to carbon-aggregator line receiver port':
+          port    => $graphite::carbon::aggregator_line_receiver_port,
+          proto   => 'tcp',
+          action  => 'accept',
+          require => Class['::firewall'],
+        }
+      }
+    }
+
   }
   else {
     # Make sure the service is stopped and disabled (the removal itself will be
