@@ -84,18 +84,16 @@
 # * Richard Pijnenburg <mailto:richard@ispavailability.com>
 #
 class graphite(
-  $autoupgrade                    = $graphite::params::autoupgrade,
-  $ensure                         = $graphite::params::ensure,
-  $firewall                       = $graphite::params::firewall,
-  $status                         = $graphite::params::status,
-  $time_zone                      = $graphite::params::time_zone,
-  $version                        = undef,
+  $autoupgrade = $graphite::params::autoupgrade,
+  $ensure      = $graphite::params::ensure,
+  $firewall    = $graphite::params::firewall,
+  $status      = $graphite::params::status,
+  $time_zone   = $graphite::params::time_zone,
+  $version     = $graphite::params::version,
 ) inherits graphite::params {
 
   validate_bool($autoupgrade)
-  if ! ($ensure in [ 'present', 'absent' ]) {
-    fail("\"${ensure}\" is not a valid ensure parameter value")
-  }
+  if ! ($ensure in [ 'present', 'absent' ]) { fail("\"${ensure}\" is not a valid ensure parameter value") }
   validate_bool($firewall)
   if ! ($status in [ 'enabled', 'disabled', 'running', 'unmanaged' ]) {
     fail("\"${status}\" is not a valid status parameter value")
