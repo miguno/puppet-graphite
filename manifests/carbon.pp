@@ -103,15 +103,9 @@ class graphite::carbon(
   }
   validate_string($version)
 
-  #### Manage actions
-
-  # package(s)
   class { 'graphite::carbon::package': }
-
-  # configuration
   class { 'graphite::carbon::config': }
 
-  # service(s)
   if $cache_enable == true {
     class { 'graphite::carbon::cache::service': }
   }
@@ -123,8 +117,6 @@ class graphite::carbon(
   if $aggregator_enable == true {
     class { 'graphite::carbon::aggregator::service': }
   }
-
-  #### Manage relationships
 
   if $ensure == 'present' {
 
