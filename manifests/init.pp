@@ -101,8 +101,17 @@ class graphite(
   validate_string($time_zone)
   validate_string($version)
 
-  class { 'graphite::carbon': }
-  class { 'graphite::whisper': }
-  class { 'graphite::web': }
+  include '::graphite::carbon'
+  include '::graphite::whisper'
+  include '::graphite::web'
+
+  anchor { 'graphite::begin': }
+  anchor { 'graphite::end': }
+
+  Anchor['graphite::begin'] ->
+  Class['::graphite::carbon'] ->
+  Class['::graphite::whisper'] ->
+  Class['::graphite::web'] ->
+  Anchor['graphite::end']
 
 }
