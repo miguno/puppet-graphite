@@ -4,14 +4,29 @@ A Wirbelsturm-compatible Puppet module for managing and configuring [Graphite](h
 
 _Note: This module is a work in progress.  The code still needs some cleaning and better style._
 
+---
 
-# Compatibility
+Table of Contents
 
-* Puppet 3.x
-* Tested with RHEL/CentOS 6
+* <a href="#usage">Usage and configuration</a>
+    * <a href="#carbon">General configuration</a>
+    * <a href="#carbon">Configuring carbon</a>
+    * <a href="#graphite-web">Configuring graphite-web</a>
+    * <a href="#whisper">Configuring Whisper</a>
+* <a href="#requirements">Requirements</a>
+* <a href="#assumptions">Assumptions</a>
+* <a href="#credits">Credits</a>
+
+---
 
 
-# Usage
+<a name="usage"></a>
+
+# Usage and configuration
+
+<a name="general"></a>
+
+## General configuration
 
 Installation, make sure service is running and will be started at boot time:
 
@@ -29,6 +44,8 @@ Install everything but disable service(s) afterwards:
        status => 'disabled',
      }
 
+
+<a name="carbon"></a>
 
 ## carbon
 
@@ -78,7 +95,9 @@ For defining the storage methods a define is in place:
 An other of sequence can be given with the order => directive.
 
 
-## web
+<a name="graphite-web"></a>
+
+## graphite-web
 
 For the graphite-web there are 2 variables:
 
@@ -193,11 +212,24 @@ nginx::nginx_locations:
 
 
 
+<a name="whisper"></a>
+
 ## whisper
 
 Whisper is the storage for all the data.
 This one has no special configuration.
 
+
+<a name="requirements"></a>
+
+# Requirements
+
+* Tested with RHEL/CentOS 6
+* Puppet 3.x
+* Ruby 1.9 (preferred) or 1.8
+
+
+<a name="assumptions"></a>
 
 # Assumptions
 
@@ -210,3 +242,11 @@ Certain assumptions have been made with this module:
 5. If you want to run graphite-web, then supervisord 3.x must be available through a package repository and you have
    loaded the [puppet-supervisor](https://github.com/miguno/puppet-supervisor) module (e.g. through librarian-puppet)
    as forked by miguno.
+
+
+<a name="Credits"></a>
+
+# Credits
+
+This module is based on -- and a fork of -- the great work done by
+[electrical](https://github.com/electrical/puppet-graphite).
