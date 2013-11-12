@@ -12,7 +12,7 @@ Table of Contents
     * <a href="#general">General configuration</a>
     * <a href="#carbon">Configuring carbon</a>
     * <a href="#graphite-web">Configuring graphite-web</a>
-    * <a href="#whisper">Configuring Whisper</a>
+    * <a href="#whisper">Configuring whisper</a>
 * <a href="#requirements">Requirements</a>
 * <a href="#assumptions">Assumptions</a>
 * <a href="#credits">Credits</a>
