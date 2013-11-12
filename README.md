@@ -1,6 +1,6 @@
 # puppet-graphite
 
-A Puppet module for managing and configuring [Graphite](http://graphite.wikidot.com/).
+A Wirbelsturm-compatible Puppet module for managing and configuring [Graphite](http://graphite.wikidot.com/).
 
 _Note: This module is a work in progress.  The code still needs some cleaning and better style._
 
