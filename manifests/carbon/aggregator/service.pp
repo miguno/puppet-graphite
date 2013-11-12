@@ -32,7 +32,7 @@ class graphite::carbon::aggregator::service inherits graphite::carbon::aggregato
     }
 
     if ($graphite::status in ['enabled', 'running', 'unmanaged']) {
-      if $graphite::firewall == true {
+      if $graphite::firewall_manage == true {
         firewall { '101 Graphite: allow access to carbon-aggregator line receiver port':
           port    => $graphite::carbon::aggregator_line_receiver_port,
           proto   => 'tcp',

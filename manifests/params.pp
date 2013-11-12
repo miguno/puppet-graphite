@@ -1,11 +1,11 @@
 class graphite::params {
 
-  $autoupgrade = false
-  $ensure      = 'present'
-  $firewall    = false
-  $status      = 'enabled'
-  $time_zone   = "America/New_York" # see http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-  $version     = undef
+  $autoupgrade     = false
+  $ensure          = 'present'
+  $firewall_manage = false
+  $status          = 'enabled'
+  $time_zone       = "America/New_York" # see http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  $version         = undef
 
   case $::operatingsystem {
     'CentOS', 'Fedora', 'RedHat', 'Amazon' ,'Scientific': {

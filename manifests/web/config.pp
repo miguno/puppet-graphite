@@ -34,7 +34,7 @@ class graphite::web::config {
   }
 
   if ($graphite::status in ['enabled', 'running', 'unmanaged']) {
-    if $graphite::firewall == true {
+    if $graphite::firewall_manage == true {
       firewall { '100 Graphite: allow access to Graphite web port':
         port    => $graphite::webserver_port,
         proto   => 'tcp',

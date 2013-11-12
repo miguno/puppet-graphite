@@ -32,7 +32,7 @@ class graphite::carbon::relay::service inherits graphite::carbon::relay::params 
     }
 
     if ($graphite::status in ['enabled', 'running', 'unmanaged']) {
-      if $graphite::firewall == true {
+      if $graphite::firewall_manage == true {
         firewall { '101 Graphite: allow access to carbon-relay line receiver port':
           port    => $graphite::carbon::relay_line_receiver_port,
           proto   => 'tcp',
