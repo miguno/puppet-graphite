@@ -9,7 +9,7 @@ _Note: This module is a work in progress.  The code still needs some cleaning an
 Table of Contents
 
 * <a href="#usage">Usage and configuration</a>
-    * <a href="#carbon">General configuration</a>
+    * <a href="#general">General configuration</a>
     * <a href="#carbon">Configuring carbon</a>
     * <a href="#graphite-web">Configuring graphite-web</a>
     * <a href="#whisper">Configuring Whisper</a>
@@ -19,10 +19,10 @@ Table of Contents
 
 ---
 
-
 <a name="usage"></a>
 
 # Usage and configuration
+
 
 <a name="general"></a>
 
