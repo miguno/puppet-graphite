@@ -47,7 +47,7 @@ Install everything but disable service(s) afterwards:
 
 <a name="carbon"></a>
 
-## carbon
+## Configuring carbon
 
 Carbon is 1 of the applications for graphite.
 You can activate the 3 separate services individually depending on requirments.
@@ -97,7 +97,7 @@ An other of sequence can be given with the order => directive.
 
 <a name="graphite-web"></a>
 
-## graphite-web
+## Configuring graphite-web
 
 For the graphite-web there are 2 variables:
 
@@ -214,7 +214,7 @@ nginx::nginx_locations:
 
 <a name="whisper"></a>
 
-## whisper
+## Configuring whisper
 
 Whisper is the storage for all the data.
 This one has no special configuration.
