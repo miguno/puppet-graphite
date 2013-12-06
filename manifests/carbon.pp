@@ -141,7 +141,8 @@ class graphite::carbon(
 
     graphite::carbon::cache::storage { 'default_1min_for_1day':
       pattern    => '.*',
-      retentions => '60s:1d'
+      retentions => '60s:1d',
+      order      => '9999', # make (at least somewhat) sure that the default entry is at the end of the file
     }
 
     # We need the software before configuring it.
