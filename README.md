@@ -155,6 +155,16 @@ Lastly we destroy our local Django sandbox as we do not need it anymore:
 See [Password management in Django](https://docs.djangoproject.com/en/dev/topics/auth/passwords/).
 
 
+### Configuring additional users and groups
+
+Once graphite-web is up and running you can access its user management component (driven by Django) at:
+
+    http://<graphite-root-url>/admin/
+
+You must login as administrator in order to be able to add, modify and remove users and groups.  See previous section
+on how to create the initial admin account.
+
+
 ### Example configuration with Nginx (using Hiera)
 
 This example was tested on RHEL 6.  It runs gunicorn on port `8081/tcp` for serving graphite-web, and nginx on port
