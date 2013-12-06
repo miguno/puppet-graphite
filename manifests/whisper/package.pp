@@ -1,7 +1,7 @@
 class graphite::whisper::package {
 
   if $graphite::ensure == 'present' {
-    if $graphite::version != undef {
+    if $graphite::version == undef {
       $package_ensure = $graphite::autoupgrade ? {
         true  => 'latest',
         false => 'present',
