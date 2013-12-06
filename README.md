@@ -173,16 +173,6 @@ Lastly we destroy our local Django sandbox as we do not need it anymore:
 See [Password management in Django](https://docs.djangoproject.com/en/dev/topics/auth/passwords/).
 
 
-### Configuring additional users and groups
-
-Once graphite-web is up and running you can access its user management component (driven by Django) at:
-
-    http://<graphite-root-url>/admin/
-
-You must login as administrator in order to be able to add, modify and remove users and groups.  See previous section
-on how to create the initial admin account.
-
-
 ### Configuring max number of open files (limits.conf)
 
 You can optionally configure the maximum number of open files for the user running graphite-web.  Doing so will create
@@ -295,6 +285,16 @@ Certain assumptions have been made with this module:
 <a name="faq"></a>
 
 # FAQ
+
+## Configure additional users and groups for Graphite web UI?
+
+Once graphite-web is up and running you can access its user management component (driven by Django) at:
+
+    http://<graphite-root-url>/admin/
+
+You must login with a user account that has superuser rights or the relevant permissions  in order to be able to add,
+modify and remove users and groups (the initial `admin` user has such permissions).
+
 
 ## Manually create a graphite-web admin / superuser account?
 
