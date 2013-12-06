@@ -110,6 +110,8 @@ class graphite::web(
   $gunicorn_stopasgroup    = false,
   $gunicorn_stopsignal     = 'TERM',
   $gunicorn_port           = 8081,
+  $limits_manage           = false,
+  $limits_nofile           = 65536,
   $local_settings_template = "${module_name}/etc/graphite-web/local_settings.py.erb",
   $status                  = $graphite::params::status,
   $use_hostname_server_alias = true,
@@ -148,6 +150,8 @@ class graphite::web(
   validate_bool($gunicorn_stopasgroup)
   validate_string($gunicorn_stopsignal)
   if !is_integer($gunicorn_port) { fail('The $gunicorn_port parameter must be an integer number') }
+  validate_bool($limits_manage)
+  if !is_integer($limits_nofile) { fail('The $limits_nofile parameter must be an integer number') }
   validate_string($local_settings_template)
   if ! ($status in [ 'enabled', 'disabled', 'running', 'unmanaged' ]) {
     fail("\"${status}\" is not a valid status parameter value")
@@ -164,6 +168,9 @@ class graphite::web(
 
   if $ensure == 'present' {
     Class['graphite::web::install'] -> Class['graphite::web::config'] ~> Class['graphite::web::gunicorn']
+  }
+  else {
+    # TODO: Implement removal of graphite-web
   }
 
 }

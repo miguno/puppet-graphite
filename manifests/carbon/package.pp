@@ -19,4 +19,18 @@ class graphite::carbon::package {
     ensure   => $package_ensure,
   }
 
+  if $graphite::ensure == 'present' {
+
+    if $graphite::carbon::limits_manage == true {
+      limits::fragment {
+        "${graphite::params::graphite_carbon_user}/soft/nofile": value => $graphite::carbon::limits_nofile;
+        "${graphite::params::graphite_carbon_user}/hard/nofile": value => $graphite::carbon::limits_nofile;
+      }
+    }
+
+  }
+  else {
+    # TODO: Revert our changes to /etc/security/limits.conf, if any
+  }
+
 }

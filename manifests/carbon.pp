@@ -68,6 +68,8 @@ class graphite::carbon(
   $cache_query_port  = 7002,
   $carbon_config_template        = "${module_name}/etc/carbon/carbon.conf.erb",
   $ensure            = $graphite::params::ensure,
+  $limits_manage     = false,
+  $limits_nofile     = 65536,
   $relay_enable      = false,
   $relay_line_receiver_port      = 2013,
   $status            = $graphite::params::status,
@@ -97,6 +99,8 @@ class graphite::carbon(
   if ! ($ensure in [ 'present', 'absent' ]) {
     fail("\"${ensure}\" is not a valid ensure parameter value")
   }
+  validate_bool($limits_manage)
+  if !is_integer($limits_nofile) { fail('The $limits_nofile parameter must be an integer number') }
   validate_bool($relay_enable)
   if !is_integer($relay_line_receiver_port) { fail('The $relay_line_receiver_port parameter must be an integer number') }
   if ! ($status in [ 'enabled', 'disabled', 'running', 'unmanaged' ]) {

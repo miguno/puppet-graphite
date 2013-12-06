@@ -95,6 +95,23 @@ For defining the storage methods a define is in place:
 An other of sequence can be given with the order => directive.
 
 
+### Configuring max number of open files (limits.conf)
+
+You can optionally configure the maximum number of open files for the user running carbon daemons.  Doing so will create
+an entry in `/etc/security/limits.conf` (note: this is an implementation detail and should not be relied upon) for the
+user running the carbon daemons.  By default, such an entry will not be created.
+
+Example configuration:
+
+```yaml
+# Optional: Manage /etc/security/limits.conf to tune the maximum number
+# of open files, which is a typical setting you may need to change for
+# production environments.  Default: false (do not manage)
+graphite::carbon::limits_manage: true
+graphite::carbon::limits_nofile: 32768
+```
+
+
 <a name="graphite-web"></a>
 
 ## Configuring graphite-web
@@ -163,6 +180,23 @@ Once graphite-web is up and running you can access its user management component
 
 You must login as administrator in order to be able to add, modify and remove users and groups.  See previous section
 on how to create the initial admin account.
+
+
+### Configuring max number of open files (limits.conf)
+
+You can optionally configure the maximum number of open files for the user running graphite-web.  Doing so will create
+an entry in `/etc/security/limits.conf` (note: this is an implementation detail and should not be relied upon) for the
+user running graphite-web.  By default, such an entry will not be created.
+
+Example configuration:
+
+```yaml
+# Optional: Manage /etc/security/limits.conf to tune the maximum number
+# of open files, which is a typical setting you may need to change for
+# production environments.  Default: false (do not manage)
+graphite::web::limits_manage: true
+graphite::web::limits_nofile: 32768
+```
 
 
 ### Example configuration with Nginx (using Hiera)
@@ -252,6 +286,9 @@ Certain assumptions have been made with this module:
 5. If you want to run graphite-web, then supervisord 3.x must be available through a package repository and you have
    loaded the [puppet-supervisor](https://github.com/miguno/puppet-supervisor) module (e.g. through librarian-puppet)
    as forked by miguno.
+6. If you want to configure the maximum number of open files (`nofile` in `/etc/security/limits.conf`) through this
+   Puppet module, then you must have loaded the [puppet-limits](https://github.com/miguno/puppet-limits) module (e.g.
+   through librarian-puppet) as forked by miguno.
 
 
 <a name="Credits"></a>

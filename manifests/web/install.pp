@@ -68,6 +68,16 @@ class graphite::web::install {
       group   => "$graphite::web::webserver_group",
     }
 
+    if $graphite::web::limits_manage == true {
+      limits::fragment {
+        "${graphite::params::graphite_web_user}/soft/nofile": value => $graphite::web::limits_nofile;
+        "${graphite::params::graphite_web_user}/hard/nofile": value => $graphite::web::limits_nofile;
+      }
+    }
+
+  }
+  else {
+    # TODO: Revert our changes to /etc/security/limits.conf, if any
   }
 
 }

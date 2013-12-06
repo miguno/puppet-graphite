@@ -9,4 +9,5 @@ project_page     'https://github.com/electrical/puppet-graphite'
 dependency       'puppetlabs/firewall', '>= 0.4.2'
 dependency       'puppetlabs/stdlib', '>= 3.0.0'
 dependency       'ispavailability/file_concat', '>= 0.0.1'
-#TODO#dependency 'miguno/supervisor'
+#TODO#dependency 'miguno/limits'     # https://github.com/miguno/puppet-limits
+#TODO#dependency 'miguno/supervisor' # https://github.com/miguno/puppet-supervisor
