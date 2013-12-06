@@ -4,7 +4,7 @@
 
 mode = 'django'
 bind = '127.0.0.1:<%= scope.lookupvar('graphite::web::gunicorn_port') %>'
-pythonpath = '<%= scope.lookupvar('graphite::web::graphite_pythonpath') %>'
+pythonpath = '<%= scope.lookupvar('graphite::params::graphite_pythonpath') %>'
 preload_app = True
 workers = 2
 timeout = 30
