@@ -329,6 +329,16 @@ See [How to reset django admin password](http://stackoverflow.com/questions/6358
 for more information.
 
 
+## Get a dump of the Graphite web UI database?
+
+_Note: This is about the database Graphite uses to store user accounts and dashboards.  It is NOT about the actual_
+_metrics, which are stored in Whisper files._
+
+    $ sudo python /path/to/manage.py dumpdata > /tmp/django-dump.json
+
+See [Bootstrap the Django DB](http://obfuscurity.com/2012/04/Unhelpful-Graphite-Tip-4) for more information.
+
+
 <a name="credits"></a>
 
 # Credits
