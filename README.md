@@ -15,6 +15,7 @@ Table of Contents
     * <a href="#whisper">Configuring whisper</a>
 * <a href="#requirements">Requirements</a>
 * <a href="#assumptions">Assumptions</a>
+* <a href="#faq">FAQ</a>
 * <a href="#credits">Credits</a>
 
 ---
@@ -291,7 +292,44 @@ Certain assumptions have been made with this module:
    through librarian-puppet) as forked by miguno.
 
 
-<a name="Credits"></a>
+<a name="faq"></a>
+
+# FAQ
+
+## Manually create a graphite-web admin / superuser account?
+
+Graphite-web is based on Django, so you can follow the standard Django procedures.
+
+    $ sudo python /path/to/manage.py createsuperuser
+
+It is recommended to use the name `admin` for the admin/superuser account.
+
+
+## Reset admin password for graphite-web?
+
+Graphite-web is based on Django, so you can follow the standard Django procedures.
+
+    $ sudo python /path/to/manage.py changepassword admin
+
+
+Alternatively you can also use the Django shell:
+
+    $ sudo python /path/to/manage.py shell
+    Python 2.6.6 (r266:84292, Oct 12 2012, 14:23:48)
+    >>> from django.contrib.auth.models import User
+    >>> user = User.objects.get(username='normaluser')
+    >>> user.set_password('plain password')  # Don't enter the salted/hashed version here!
+    >>> user.save()
+
+Other helpful `User` methods are:
+
+    >>> admins = User.objects.filter(is_superuser=True)
+
+See [How to reset django admin password](http://stackoverflow.com/questions/6358030/how-to-reset-django-admin-password)
+for more information.
+
+
+<a name="credits"></a>
 
 # Credits
 
