@@ -52,7 +52,7 @@
 #   String to configure the time zone used by Graphite.
 #   Q.v.:
 #   * Allowed values: {List of tz database time zones}[http://en.wikipedia.org/wiki/List_of_tz_database_time_zones]
-#   Defaults to <tt>America/New_York</tt>.
+#   Defaults to <tt>UTC</tt>.
 #
 # [*version*]
 #   String to set the specific version you want to install.

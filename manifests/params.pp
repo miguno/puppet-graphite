@@ -4,7 +4,7 @@ class graphite::params {
   $ensure          = 'present'
   $firewall_manage = false
   $status          = 'enabled'
-  $time_zone       = "America/New_York" # see http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  $time_zone       = "UTC" # see http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   $version         = undef
 
   case $::operatingsystem {
