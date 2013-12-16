@@ -6,7 +6,7 @@ class graphite::carbon::config {
     ensure => directory,
     owner  => 'root',
     group  => 'root',
-    mode   => '0644',
+    mode   => '0755',
   }
 
   file { 'carbon-main-config':
