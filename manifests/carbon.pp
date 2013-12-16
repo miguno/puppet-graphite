@@ -74,7 +74,6 @@ class graphite::carbon(
   $relay_line_receiver_port      = 2013,
   $status            = $graphite::params::status,
   $storage_dir       = $graphite::params::storage_dir,
-  $storage_rules     = {},
   $version           = undef,
 ) inherits graphite::params {
 
@@ -108,12 +107,13 @@ class graphite::carbon(
     fail("\"${status}\" is not a valid status parameter value")
   }
   validate_absolute_path($storage_dir)
-  validate_hash($storage_rules)
   validate_string($version)
 
 
   class { 'graphite::carbon::package': }
   class { 'graphite::carbon::config': }
+
+  $storage_rules = hiera('graphite::carbon::cache::storage_rules', {})
   create_resources('graphite::carbon::cache::storage', $storage_rules)
 
   if $cache_enable == true {
