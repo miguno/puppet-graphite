@@ -48,4 +48,12 @@ class graphite::carbon::config {
     require => File['/etc/carbon'],
   }
 
+  file { $graphite::carbon::storage_dir:
+    ensure  => directory,
+    owner   => $graphite::params::graphite_carbon_user,
+    group   => $graphite::params::graphite_carbon_group,
+    mode    => '0755',
+    recurse => true,
+  }
+
 }

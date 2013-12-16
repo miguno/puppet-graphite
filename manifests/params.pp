@@ -9,10 +9,10 @@ class graphite::params {
 
   case $::operatingsystem {
     'CentOS', 'Fedora', 'RedHat', 'Amazon' ,'Scientific': {
+      $graphite_carbon_group    = 'carbon' # Controlled by the RPM
       $graphite_carbon_user     = 'carbon' # Controlled by the RPM
       # TODO: Try to auto-detect location if possible
       $graphite_pythonpath      = '/usr/lib/python2.6/site-packages/graphite'
-      $graphite_web_user        = 'graphite' # Controlled by the RPM
       $managepy_path    = "${graphite_pythonpath}/manage.py"
       $package_carbon   = [ 'python-carbon' ]
       $package_gunicorn = [ 'python-gunicorn' ]
@@ -31,6 +31,7 @@ class graphite::params {
       $service_aggregator_hasrestart = true
       $service_aggregator_hasstatus  = true
       $service_aggregator_pattern    = $service_aggregator_name
+      $storage_dir = '/var/lib/carbon'
     }
     default: {
       fail("'${module_name}' does not support operating system '${::operatingsystem}'")
