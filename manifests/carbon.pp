@@ -132,17 +132,17 @@ class graphite::carbon(
 
     if $cache_enable == true {
       Class['graphite::carbon::package'] -> Class['graphite::carbon::cache::service']
-      Class['graphite::carbon::config']  -> Class['graphite::carbon::cache::service']
+      Class['graphite::carbon::config']  ~> Class['graphite::carbon::cache::service']
     }
 
     if $relay_enable == true {
       Class['graphite::carbon::package'] -> Class['graphite::carbon::relay::service']
-      Class['graphite::carbon::config']  -> Class['graphite::carbon::relay::service']
+      Class['graphite::carbon::config']  ~> Class['graphite::carbon::relay::service']
     }
 
     if $aggregator_enable == true {
       Class['graphite::carbon::package'] -> Class['graphite::carbon::aggregator::service']
-      Class['graphite::carbon::config']  -> Class['graphite::carbon::aggregator::service']
+      Class['graphite::carbon::config']  ~> Class['graphite::carbon::aggregator::service']
     }
 
     graphite::carbon::cache::storage { 'default_1min_for_1day':
