@@ -1,0 +1,37 @@
+###
+### This file is managed by Puppet.
+###
+[min]
+pattern = \.min$
+xFilesFactor = 0.1
+aggregationMethod = min
+
+[max]
+pattern = \.max$
+xFilesFactor = 0.1
+aggregationMethod = max
+
+[sum]
+pattern = \.count$
+xFilesFactor = 0
+aggregationMethod = sum
+
+[m1_rate]
+pattern = \.m1_rate$
+xFilesFactor = 0
+aggregationMethod = average
+
+[m5_rate]
+pattern = \.m5_rate$
+xFilesFactor = 0
+aggregationMethod = average
+
+[m15_rate]
+pattern = \.m15_rate$
+xFilesFactor = 0
+aggregationMethod = average
+
+[default_average]
+pattern = .*
+xFilesFactor = 0.3
+aggregationMethod = average

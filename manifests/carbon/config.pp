@@ -48,6 +48,16 @@ class graphite::carbon::config {
     require => File['/etc/carbon'],
   }
 
+  file { 'storage-aggregation':
+    path    => '/etc/carbon/storage-aggregation.conf',
+    ensure  => file,
+    content => template("$graphite::carbon::storage_aggregation_config_template"),
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    require => File['/etc/carbon'],
+  }
+
   file { $graphite::carbon::storage_dir:
     ensure       => directory,
     owner        => $graphite::params::graphite_carbon_user,
