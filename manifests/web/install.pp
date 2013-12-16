@@ -70,8 +70,8 @@ class graphite::web::install {
 
     if $graphite::web::limits_manage == true {
       limits::fragment {
-        "${graphite::params::graphite_web_user}/soft/nofile": value => $graphite::web::limits_nofile;
-        "${graphite::params::graphite_web_user}/hard/nofile": value => $graphite::web::limits_nofile;
+        "${graphite::web::webserver_user}/soft/nofile": value => $graphite::web::limits_nofile;
+        "${graphite::web::webserver_user}/hard/nofile": value => $graphite::web::limits_nofile;
       }
     }
 
