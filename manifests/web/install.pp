@@ -26,19 +26,19 @@ class graphite::web::install {
   if $graphite::ensure == 'present' {
 
     file { 'graphite-db-dir':
-      path    => '/var/lib/graphite-web',
       ensure  => directory,
-      owner   => "${graphite::web::webserver_user}",
-      group   => "${graphite::web::webserver_group}",
+      path    => '/var/lib/graphite-web',
+      owner   => $graphite::web::webserver_user,
+      group   => $graphite::web::webserver_group,
       mode    => '0755',
       require => Package[$graphite::params::package_web],
     }
 
     file { 'graphite-log-dir':
-      path    => '/var/log/graphite-web',
       ensure  => directory,
-      owner   => "${graphite::web::webserver_user}",
-      group   => "${graphite::web::webserver_group}",
+      path    => '/var/log/graphite-web',
+      owner   => $graphite::web::webserver_user,
+      group   => $graphite::web::webserver_group,
       mode    => '0755',
       require => Package[$graphite::params::package_web],
     }
@@ -64,8 +64,8 @@ class graphite::web::install {
     ->
     file { $graphite::web::db:
       ensure  => file,
-      owner   => "$graphite::web::webserver_user",
-      group   => "$graphite::web::webserver_group",
+      owner   => $graphite::web::webserver_user,
+      group   => $graphite::web::webserver_group,
     }
 
     if $graphite::web::limits_manage == true {
