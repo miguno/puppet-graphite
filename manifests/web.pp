@@ -116,9 +116,10 @@ class graphite::web(
   $status                  = $graphite::params::status,
   $use_hostname_server_alias = true,
   $version                 = undef,
-  $webserver_group         = 'nginx',
+  $webserver_group         = $graphite::params::webserver_group,
+  $webserver_module        = $graphite::params::webserver_module,
   $webserver_port          = 8080,
-  $webserver_user          = 'nginx',
+  $webserver_user          = $graphite::params::webserver_user,
 ) inherits graphite::params {
 
   validate_string($admin_email)

@@ -1,11 +1,12 @@
 class graphite::params {
 
-  $autoupgrade     = false
-  $ensure          = 'present'
-  $firewall_manage = false
-  $status          = 'enabled'
-  $time_zone       = "UTC" # see http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-  $version         = undef
+  $autoupgrade      = false
+  $ensure           = 'present'
+  $firewall_manage  = false
+  $webserver_module = '::nginx' # Puppet module, here: puppet-nginx
+  $status           = 'enabled'
+  $time_zone        = "UTC" # see http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  $version          = undef
 
   case $::operatingsystem {
     'CentOS', 'Fedora', 'RedHat', 'Amazon' ,'Scientific': {
@@ -32,6 +33,8 @@ class graphite::params {
       $service_aggregator_hasstatus  = true
       $service_aggregator_pattern    = $service_aggregator_name
       $storage_dir = '/var/lib/carbon'
+      $webserver_group  = 'nginx'
+      $webserver_user   = 'nginx'
     }
     default: {
       fail("'${module_name}' does not support operating system '${::operatingsystem}'")

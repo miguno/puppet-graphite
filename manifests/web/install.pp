@@ -31,7 +31,10 @@ class graphite::web::install {
       owner   => $graphite::web::webserver_user,
       group   => $graphite::web::webserver_group,
       mode    => '0755',
-      require => Package[$graphite::params::package_web],
+      require => [
+        Package[$graphite::params::package_web],
+        Class[$graphite::web::webserver_module],
+      ],
     }
 
     file { 'graphite-log-dir':
@@ -40,7 +43,10 @@ class graphite::web::install {
       owner   => $graphite::web::webserver_user,
       group   => $graphite::web::webserver_group,
       mode    => '0755',
-      require => Package[$graphite::params::package_web],
+      require => [
+        Package[$graphite::params::package_web],
+        Class[$graphite::web::webserver_module],
+      ],
     }
 
     file { $graphite::web::db_init_file:
@@ -66,12 +72,17 @@ class graphite::web::install {
       ensure  => file,
       owner   => $graphite::web::webserver_user,
       group   => $graphite::web::webserver_group,
+      require => Class[$graphite::web::webserver_module],
     }
 
     if $graphite::web::limits_manage == true {
-      limits::fragment {
-        "${graphite::web::webserver_user}/soft/nofile": value => $graphite::web::limits_nofile;
-        "${graphite::web::webserver_user}/hard/nofile": value => $graphite::web::limits_nofile;
+      limits::fragment { "${graphite::web::webserver_user}/soft/nofile":
+        value => $graphite::web::limits_nofile,
+        require => Class[$graphite::web::webserver_module],
+      }
+      limits::fragment { "${graphite::web::webserver_user}/hard/nofile":
+        value => $graphite::web::limits_nofile,
+        require => Class[$graphite::web::webserver_module],
       }
     }
 
