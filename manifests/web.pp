@@ -97,7 +97,6 @@ class graphite::web(
   $gunicorn_config         = '/etc/graphite-web/gunicorn.conf.py',
   $gunicorn_config_template        = "${module_name}/etc/graphite-web/gunicorn.conf.py.erb",
   $gunicorn_command        = 'gunicorn_django -c /etc/graphite-web/gunicorn.conf.py',
-  $gunicorn_directory      = '/var/lib/graphite-web',
   $gunicorn_enable         = true,
   $gunicorn_ensure         = 'present',
   $gunicorn_manage         = true,

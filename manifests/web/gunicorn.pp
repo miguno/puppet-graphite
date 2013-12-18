@@ -11,7 +11,7 @@ class graphite::web::gunicorn {
         ensure                 => $graphite::web::gunicorn_ensure,
         enable                 => $graphite::web::gunicorn_enable,
         command                => $graphite::web::gunicorn_command,
-        directory              => $graphite::web::gunicorn_directory,
+        directory              => '/',
         user                   => $graphite::web::webserver_user,
         group                  => $graphite::web::webserver_group,
         autorestart            => $graphite::web::gunicorn_autorestart,
