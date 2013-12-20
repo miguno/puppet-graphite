@@ -48,6 +48,12 @@ class graphite::carbon::config {
     require => File['/etc/carbon'],
   }
 
+  file_fragment { "carbon_storage_schemas_footer_${::fqdn}":
+    tag     => "carbon_cache_storage_config_${::fqdn}",
+    content => template("${module_name}/etc/carbon/storage-schemas-footer.erb"),
+    order   => 999999,
+  }
+
   file { 'storage-aggregation':
     path    => '/etc/carbon/storage-aggregation.conf',
     ensure  => file,
