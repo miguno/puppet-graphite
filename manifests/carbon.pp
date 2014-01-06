@@ -60,7 +60,7 @@ class graphite::carbon(
   $aggregator_enable = hiera('graphite::carbon::aggregator_enable', false),
   $aggregator_line_receiver_port = 2023,
   $aggregator_rules  = [],
-  $autoupgrade       = hiera('graphite::autoupgrade', false),
+  $autoupgrade       = hiera('graphite::autoupgrade', $graphite::params::autoupgrade),
   $cache_enable      = hiera('graphite::carbon::cache_enable', false),
   $cache_line_receiver_port      = 2003,
   $cache_max_creates_per_minute  =   50,

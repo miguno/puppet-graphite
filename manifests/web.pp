@@ -86,7 +86,7 @@ class graphite::web(
   $admin_email             = 'admin@example.com',
   $admin_password          = 'pbkdf2_sha256$10000$yhmSGMwIMU0t$HDegvfcy2i14qhQgWhDP7fL5Pf658Cfu065iv0e8YlE=',
   $admin_user              = 'admin',
-  $autoupgrade             = hiera('graphite::autoupgrade', false),
+  $autoupgrade             = hiera('graphite::autoupgrade', $graphite::params::autoupgrade),
   $dashboard_config_template       = "${module_name}/etc/graphite-web/dashboard.conf.erb",
   $django_secret_key       = 'UNSAFE_DEFAULT',
   $ensure                  = $graphite::params::ensure,
