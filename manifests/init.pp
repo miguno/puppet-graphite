@@ -84,9 +84,9 @@
 # * Richard Pijnenburg <mailto:richard@ispavailability.com>
 #
 class graphite(
-  $autoupgrade     = $graphite::params::autoupgrade,
+  $autoupgrade     = hiera('graphite::autoupgrade', false),
   $ensure          = $graphite::params::ensure,
-  $firewall_manage = $graphite::params::firewall_manage,
+  $firewall_manage = hiera('graphite::firewall_manage', false),
   $status          = $graphite::params::status,
   $time_zone       = $graphite::params::time_zone,
   $version         = $graphite::params::version,

@@ -60,7 +60,7 @@
 # * Richard Pijnenburg <mailto:richard@ispavailability.com>
 #
 class graphite::whisper(
-  $autoupgrade = $graphite::params::autoupgrade,
+  $autoupgrade = hiera('graphite::autoupgrade', false),
   $ensure      = $graphite::params::ensure,
   $status      = $graphite::params::status,
   $version     = undef,
