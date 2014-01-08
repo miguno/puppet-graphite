@@ -101,6 +101,7 @@ class graphite::web(
   $gunicorn_ensure         = 'present',
   $gunicorn_manage         = hiera('graphite::web::gunicorn_manage', true),
   $gunicorn_name           = 'gunicorn',
+  $gunicorn_port           = 8081,
   $gunicorn_retries        = 999,
   $gunicorn_startsecs      = 10,
   $gunicorn_stderr_logfile_keep    = 10,
@@ -109,7 +110,8 @@ class graphite::web(
   $gunicorn_stdout_logfile_maxsize = '20MB',
   $gunicorn_stopasgroup    = hiera('graphite::web::gunicorn_stopasgroup', false),
   $gunicorn_stopsignal     = 'TERM',
-  $gunicorn_port           = 8081,
+  $gunicorn_timeout        = 30,
+  $gunicorn_workers        = 2,
   $limits_manage           = hiera('graphite::web::limits_manage', false),
   $limits_nofile           = 65536,
   $local_settings_template = "${module_name}/etc/graphite-web/local_settings.py.erb",
@@ -140,6 +142,7 @@ class graphite::web(
   validate_string($gunicorn_ensure)
   validate_bool($gunicorn_manage)
   validate_string($gunicorn_name)
+  if !is_integer($gunicorn_port) { fail('The $gunicorn_port parameter must be an integer number') }
   if !is_integer($gunicorn_retries) { fail('The $gunicorn_retries parameter must be an integer number') }
   if !is_integer($gunicorn_startsecs) { fail('The $gunicorn_startsecs parameter must be an integer number') }
   if !is_integer($gunicorn_stderr_logfile_keep) {                                                                            fail('The $gunicorn_stderr_logfile_keep parameter must be an integer number')
@@ -150,7 +153,8 @@ class graphite::web(
   validate_string($gunicorn_stdout_logfile_maxsize)
   validate_bool($gunicorn_stopasgroup)
   validate_string($gunicorn_stopsignal)
-  if !is_integer($gunicorn_port) { fail('The $gunicorn_port parameter must be an integer number') }
+  if !is_integer($gunicorn_timeout) { fail('The $gunicorn_timeout parameter must be an integer number') }
+  if !is_integer($gunicorn_workers) { fail('The $gunicorn_workers parameter must be an integer number') }
   validate_bool($limits_manage)
   if !is_integer($limits_nofile) { fail('The $limits_nofile parameter must be an integer number') }
   validate_string($local_settings_template)
