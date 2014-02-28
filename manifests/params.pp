@@ -2,7 +2,6 @@ class graphite::params {
 
   $autoupgrade      = false
   $ensure           = 'present'
-  $firewall_manage  = false
   $webserver_module = '::nginx' # Puppet module, here: puppet-nginx
   $status           = 'enabled'
   $time_zone        = "UTC" # see http://en.wikipedia.org/wiki/List_of_tz_database_time_zones

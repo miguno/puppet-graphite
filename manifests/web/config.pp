@@ -33,15 +33,4 @@ class graphite::web::config {
     content => template($graphite::web::gunicorn_config_template),
   }
 
-  if ($graphite::status in ['enabled', 'running', 'unmanaged']) {
-    if $graphite::firewall_manage == true {
-      firewall { '100 Graphite: allow access to Graphite web port':
-        port    => $graphite::webserver_port,
-        proto   => 'tcp',
-        action  => 'accept',
-        require => Class['::firewall'],
-      }
-    }
-  }
-
 }

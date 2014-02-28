@@ -86,7 +86,6 @@
 class graphite(
   $autoupgrade     = hiera('graphite::autoupgrade', $graphite::params::autoupgrade),
   $ensure          = $graphite::params::ensure,
-  $firewall_manage = hiera('graphite::firewall_manage', $graphite::params::firewall_manage),
   $status          = $graphite::params::status,
   $time_zone       = $graphite::params::time_zone,
   $version         = $graphite::params::version,
@@ -94,7 +93,6 @@ class graphite(
 
   validate_bool($autoupgrade)
   if ! ($ensure in [ 'present', 'absent' ]) { fail("\"${ensure}\" is not a valid ensure parameter value") }
-  validate_bool($firewall_manage)
   if ! ($status in [ 'enabled', 'disabled', 'running', 'unmanaged' ]) {
     fail("\"${status}\" is not a valid status parameter value")
   }

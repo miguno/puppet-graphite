@@ -42,7 +42,6 @@ class graphite::web::gunicorn {
       }
     }
 
-    # TODO: Configure firewall for gunicorn if needed
   }
 
 }

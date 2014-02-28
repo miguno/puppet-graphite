@@ -1,13 +1,20 @@
-# 0.0.3 (unreleased)
+# 0.0.4 (unreleased)
 
 * TBD
+
+
+# 0.0.3 (February 28, 2014)
+
+BACKWARDS INCOMPATIBILITY
+
+* Drop firewall support.
 
 
 # 0.0.2 (November 06, 2013)
 
 BACKWARDS INCOMPATIBILITY
 
-* Drop Debian and Ubuntu support because it was never really tested anyways upstream
+* Drop Debian and Ubuntu support because it was never really tested anyways upstream.
 
 IMPROVEMENTS
 
