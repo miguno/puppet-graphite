@@ -1,6 +1,7 @@
 # puppet-graphite
 
-A Wirbelsturm-compatible Puppet module for managing and configuring [Graphite](http://graphite.wikidot.com/).
+[Wirbelsturm](https://github.com/miguno/wirbelsturm)-compatible [Puppet](http://puppetlabs.com/) module to deploy
+[Graphite](http://graphite.wikidot.com/).
 
 _Note: This module is a work in progress.  The code still needs some cleaning and better style._
 
