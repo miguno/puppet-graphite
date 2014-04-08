@@ -9,6 +9,7 @@ _Note: This module is a work in progress.  The code still needs some cleaning an
 
 Table of Contents
 
+* <a href="#installation">Installation</a>
 * <a href="#usage">Usage and configuration</a>
     * <a href="#general">General configuration</a>
     * <a href="#carbon">Configuring carbon</a>
@@ -20,6 +21,33 @@ Table of Contents
 * <a href="#credits">Credits</a>
 
 ---
+
+<a name="installation"></a>
+
+# Installation
+
+It is recommended to use [librarian-puppet](https://github.com/rodjek/librarian-puppet) to add this module to your
+Puppet setup.
+
+Add the following lines to your `Puppetfile`:
+
+```
+# Add the dependencies as hosted on public Puppet Forge.
+#
+# We intentionally do not include e.g. the stdlib dependency in our Modulefile to make it easier for users who decided
+# to use internal copies of stdlib so that their deployments are not coupled to the availability of PuppetForge.  While
+# there are tools such as puppet-library for hosting internal forges or for proxying to the public forge, not everyone
+# is actually using those tools.
+mod 'puppetlabs/stdlib'
+mod 'ispavailability/file_concat', '0.1.0'
+
+# Add the puppet-graphite module
+mod 'graphite',
+  :git => 'https://github.com/miguno/puppet-graphite.git'
+```
+
+Then use librarian-puppet to install (or update) the Puppet modules.
+
 
 <a name="usage"></a>
 
