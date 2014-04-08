@@ -1,16 +1,18 @@
-# 0.0.4 (unreleased)
+# Change log
+
+## 0.0.4 (unreleased)
 
 * TBD
 
 
-# 0.0.3 (February 28, 2014)
+## 0.0.3 (February 28, 2014)
 
 BACKWARDS INCOMPATIBILITY
 
 * Drop firewall support.
 
 
-# 0.0.2 (November 06, 2013)
+## 0.0.2 (November 06, 2013)
 
 BACKWARDS INCOMPATIBILITY
 
@@ -27,6 +29,6 @@ IMPROVEMENTS
 * Extend and improve user documentation, e.g. how to create custom Django passwords
 
 
-# 0.0.1 (January 19, 2013)
+## 0.0.1 (January 19, 2013)
 
 * Initial release of the module (upstream repo, i.e. before our fork)
