@@ -4,6 +4,7 @@
 
 * Better handling of storage directories for carbon and graphite-web:  We support now the two parameters
   `$graphite::carbon::storage_dir` and `$graphite::web::storage_dir`, respectively.
+* Location of log directory of graphite-web is now configurable via `$graphite::web::log_dir`.
 
 
 ## 0.0.4 (April 08, 2014)

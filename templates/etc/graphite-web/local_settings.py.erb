@@ -66,7 +66,7 @@ CONTENT_DIR = '/usr/share/graphite/webapp/content'
 WHISPER_DIR = '<%= scope.lookupvar('graphite::carbon::storage_dir') %>/whisper/'
 RRD_DIR = '<%= scope.lookupvar('graphite::carbon::storage_dir') %>/rrd'
 DATA_DIRS = [WHISPER_DIR] # Default: set from the above variables
-LOG_DIR = '/var/log/graphite-web/'
+LOG_DIR = '<%= scope.lookupvar("graphite::web::log_dir") %>/'
 INDEX_FILE = '<%= scope.lookupvar("graphite::web::storage_dir") %>/index'  # Search index file
 
 

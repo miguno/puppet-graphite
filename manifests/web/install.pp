@@ -39,7 +39,7 @@ class graphite::web::install {
 
     file { 'graphite-log-dir':
       ensure  => directory,
-      path    => '/var/log/graphite-web',
+      path    => $graphite::web::log_dir,
       owner   => $graphite::web::webserver_user,
       group   => $graphite::web::webserver_group,
       mode    => '0755',
