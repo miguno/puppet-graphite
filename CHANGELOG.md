@@ -1,5 +1,10 @@
 # Change log
 
+## 0.0.6 (unreleased)
+
+* TBD
+
+
 ## 0.0.5 (April 25, 2014)
 
 * Better handling of storage directories for carbon and graphite-web:  We support now the two parameters

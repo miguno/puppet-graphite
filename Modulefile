@@ -1,5 +1,5 @@
 name             'wirbelsturm-graphite'
-version          '0.0.5'
+version          '0.0.6'
 source           'https://github.com/miguno/puppet-graphite'
 author           'Michael G. Noll'
 license          'Apache License, Version 2.0'
