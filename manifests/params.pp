@@ -31,7 +31,6 @@ class graphite::params {
       $service_aggregator_hasrestart = true
       $service_aggregator_hasstatus  = true
       $service_aggregator_pattern    = $service_aggregator_name
-      $storage_dir = '/var/lib/carbon'
       $webserver_group  = 'nginx'
       $webserver_user   = 'nginx'
     }

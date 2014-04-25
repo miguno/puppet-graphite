@@ -116,6 +116,7 @@ class graphite::web(
   $limits_nofile           = 65536,
   $local_settings_template = "${module_name}/etc/graphite-web/local_settings.py.erb",
   $status                  = $graphite::params::status,
+  $storage_dir             = '/var/lib/graphite-web',
   $use_hostname_server_alias = hiera('graphite::web::use_hostname_server_alias', true),
   $version                 = undef,
   $webserver_group         = $graphite::params::webserver_group,

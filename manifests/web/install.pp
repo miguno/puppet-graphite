@@ -27,7 +27,7 @@ class graphite::web::install {
 
     file { 'graphite-db-dir':
       ensure  => directory,
-      path    => '/var/lib/graphite-web',
+      path    => $graphite::web::storage_dir,
       owner   => $graphite::web::webserver_user,
       group   => $graphite::web::webserver_group,
       mode    => '0755',

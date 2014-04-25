@@ -74,7 +74,7 @@ class graphite::carbon(
   $relay_line_receiver_port      = 2013,
   $status            = $graphite::params::status,
   $storage_aggregation_config_template = "${module_name}/etc/carbon/storage-aggregation.conf.erb",
-  $storage_dir       = $graphite::params::storage_dir,
+  $storage_dir       = '/var/lib/carbon',
   $version           = undef,
 ) inherits graphite::params {
 

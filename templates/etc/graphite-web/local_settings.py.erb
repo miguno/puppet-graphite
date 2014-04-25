@@ -51,7 +51,7 @@ GRAPHITE_ROOT = '/usr/share/graphite'
 # need to change these three settings. Note that the default settings for each
 # of these is relative to GRAPHITE_ROOT
 CONF_DIR = '/etc/graphite-web'
-STORAGE_DIR = '/var/lib/graphite-web'
+STORAGE_DIR = '<%= scope.lookupvar("graphite::web::storage_dir") %>'
 CONTENT_DIR = '/usr/share/graphite/webapp/content'
 
 # To further or fully customize the paths, modify the following. Note that the
@@ -67,7 +67,7 @@ WHISPER_DIR = '<%= scope.lookupvar('graphite::carbon::storage_dir') %>/whisper/'
 RRD_DIR = '<%= scope.lookupvar('graphite::carbon::storage_dir') %>/rrd'
 DATA_DIRS = [WHISPER_DIR] # Default: set from the above variables
 LOG_DIR = '/var/log/graphite-web/'
-INDEX_FILE = '/var/lib/graphite-web/index'  # Search index file
+INDEX_FILE = '<%= scope.lookupvar("graphite::web::storage_dir") %>/index'  # Search index file
 
 
 #####################################

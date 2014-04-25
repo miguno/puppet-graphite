@@ -1,8 +1,9 @@
 # Change log
 
-## 0.0.5 (unreleased)
+## 0.0.5 (April 25, 2014)
 
-* TBD
+* Better handling of storage directories for carbon and graphite-web:  We support now the two parameters
+  `$graphite::carbon::storage_dir` and `$graphite::web::storage_dir`, respectively.
 
 
 ## 0.0.4 (April 08, 2014)
