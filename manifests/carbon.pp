@@ -103,6 +103,7 @@ class graphite::carbon(
   }
   validate_bool($limits_manage)
   if !is_integer($limits_nofile) { fail('The $limits_nofile parameter must be an integer number') }
+  validate_absolute_path($log_dir)
   validate_bool($relay_enable)
   if !is_integer($relay_line_receiver_port) { fail('The $relay_line_receiver_port parameter must be an integer number') }
   if ! ($status in [ 'enabled', 'disabled', 'running', 'unmanaged' ]) {

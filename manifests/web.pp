@@ -160,9 +160,11 @@ class graphite::web(
   validate_bool($limits_manage)
   if !is_integer($limits_nofile) { fail('The $limits_nofile parameter must be an integer number') }
   validate_string($local_settings_template)
+  validate_absolute_path($log_dir)
   if ! ($status in [ 'enabled', 'disabled', 'running', 'unmanaged' ]) {
     fail("\"${status}\" is not a valid status parameter value")
   }
+  validate_absolute_path($storage_dir)
   validate_bool($use_hostname_server_alias)
   validate_string($version)
   validate_string($webserver_group)
