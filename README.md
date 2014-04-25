@@ -275,7 +275,6 @@ nginx::nginx_locations:
 ```
 
 
-
 <a name="whisper"></a>
 
 ## Configuring whisper
