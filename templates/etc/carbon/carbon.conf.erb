@@ -31,7 +31,7 @@ STORAGE_DIR    = <%= scope.lookupvar('graphite::carbon::storage_dir') %>/
 LOCAL_DATA_DIR = <%= scope.lookupvar('graphite::carbon::storage_dir') %>/whisper/
 WHITELISTS_DIR = <%= scope.lookupvar('graphite::carbon::storage_dir') %>/lists/
 CONF_DIR       = /etc/carbon/
-LOG_DIR        = /var/log/carbon/
+LOG_DIR        = <%= scope.lookupvar('graphite::carbon::log_dir') %>/
 PID_DIR        = /var/run/
 
 # Specify the user to drop privileges to

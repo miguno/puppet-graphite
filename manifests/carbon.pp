@@ -70,6 +70,7 @@ class graphite::carbon(
   $ensure            = $graphite::params::ensure,
   $limits_manage     = hiera('graphite::carbon::limits_manage', false),
   $limits_nofile     = 65536,
+  $log_dir           = '/var/log/carbon',
   $relay_enable      = hiera('graphite::carbon::relay_enable', false),
   $relay_line_receiver_port      = 2013,
   $status            = $graphite::params::status,
