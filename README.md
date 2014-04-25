@@ -149,8 +149,8 @@ graphite::carbon::limits_nofile: 32768
 For the graphite-web there are 2 variables:
 
     # Templates
-    web_dashboard_config_file => "${module_name}/etc/graphite-web/dashboard.conf.erb"
-    web_local_settings_file   => "${module_name}/etc/graphite-web/local_settings.py.erb"
+    $graphite::web::dashboard_config_template => "${module_name}/etc/graphite-web/dashboard.conf.erb"
+    $graphite::web::local_settings_template   => "${module_name}/etc/graphite-web/local_settings.py.erb"
 
 The default superuser of the graphite-web application is user `admin` with password `wirbelsturm` and email address
 `admin@example.com`.
