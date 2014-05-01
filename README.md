@@ -356,6 +356,17 @@ Other helpful `User` methods are:
 See [How to reset django admin password](http://stackoverflow.com/questions/6358030/how-to-reset-django-admin-password)
 for more information.
 
+Note: In case you need to manually _create_ the admin user run the following command:
+
+```
+$ sudo python /path/to/manage.py createsuperuser
+Username (Leave blank to use 'root'): admin
+E-mail address: foo@example.com
+Password:
+Password (again):
+Superuser created successfully.
+```
+
 
 ## Get a dump of the Graphite web UI database?
 
